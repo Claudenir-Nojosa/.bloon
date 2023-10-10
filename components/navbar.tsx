@@ -7,31 +7,23 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
-
+import { LogIn } from "lucide-react";
 import { link as linkStyles } from "@nextui-org/theme";
-
 import { siteConfig } from "@/config/site";
 import NextLink from "next/link";
 import clsx from "clsx";
-
 import { ThemeSwitch } from "@/components/theme-switch";
 import {
   TwitterIcon,
   GithubIcon,
   DiscordIcon,
-  HeartFilledIcon,
-  SearchIcon,
 } from "@/components/icons";
-
-import { Logo } from "@/components/icons";
 
 export const Navbar = () => {
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
+      {/* Parte da esquerda */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
@@ -55,7 +47,7 @@ export const Navbar = () => {
           ))}
         </ul>
       </NavbarContent>
-
+      {/* Parte da direita */}
       <NavbarContent
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
@@ -71,9 +63,12 @@ export const Navbar = () => {
             <GithubIcon className="text-default-500" />
           </Link>
           <ThemeSwitch />
+          <NextLink href="/login">
+            <LogIn className="text-zinc-500 hover:text-zinc-500 hover:opacity-75 transition-all duration-100"/>
+          </NextLink>
         </NavbarItem>
       </NavbarContent>
-
+      {/* Parte da direita versão mobile */}
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <Link isExternal href={siteConfig.links.github} aria-label="Github">
           <GithubIcon className="text-default-500" />
@@ -81,7 +76,7 @@ export const Navbar = () => {
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
-
+      {/* Parte da direita versão mobile dropdown */}
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (

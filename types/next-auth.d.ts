@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
   /**
@@ -11,6 +11,6 @@ declare module "next-auth" {
       name: string | null | undefined;
       email: string | null | undefined;
       image: string | null | undefined;
-    };
+    } & DefaultSession["user"];
   }
 }
