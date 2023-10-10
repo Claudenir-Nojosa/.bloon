@@ -5,7 +5,7 @@ export const siteConfig = {
   description: "A Next.js finance app.",
   navItems: [
     {
-      label: "Home",
+      label: "Início",
       href: "/",
     },
   ],
