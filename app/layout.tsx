@@ -18,9 +18,9 @@ export const metadata: Metadata = {
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "https://github.com/Claudenir-Nojosa/servidor_estaticos/raw/main/site-bloon-favicon.ico",
+    shortcut: "https://github.com/Claudenir-Nojosa/servidor_estaticos/raw/main/site-bloon-favicon.ico",
+    apple: "https://github.com/Claudenir-Nojosa/servidor_estaticos/raw/main/site-bloon-favicon.ico",
   },
 };
 
