@@ -11,8 +11,8 @@ export const siteConfig = {
   ],
   navMenuItems: [
     {
-      label: "",
-      href: "",
+      label: "Entrar",
+      href: "/login",
     },
   ],
   links: {

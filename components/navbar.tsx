@@ -81,28 +81,12 @@ export const Navbar = async () => {
         <div className="mx-4 mt-2 flex flex-col gap-2 text-zinc-300">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                    ? "danger"
-                    : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
+              <Link color="foreground" href={item.href} size="lg">
                 {item.label}
               </Link>
             </NavbarMenuItem>
           ))}
-          <NavbarMenuItem>
-            {session?.user ? (
-              <LogOutButton />
-            ) : (
-              <NextLink href="/login">Entrar</NextLink>
-            )}
-          </NavbarMenuItem>
+          <NavbarMenuItem>{session?.user && <LogOutButton />}</NavbarMenuItem>
         </div>
       </NavbarMenu>
     </NextUINavbar>
