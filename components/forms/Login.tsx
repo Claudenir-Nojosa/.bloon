@@ -30,7 +30,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (session.status === "authenticated") {
-      router.push("/dashboard");
+      router.push("/");
     }
   });
   const form = useForm<z.infer<typeof LoginSchema>>({

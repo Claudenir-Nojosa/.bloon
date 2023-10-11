@@ -16,8 +16,8 @@ export const siteConfig = {
     },
   ],
   links: {
-    github: "",
-    twitter: "",
+    github: "https://github.com/Claudenir-Nojosa",
+    twitter: "https://twitter.com/nojosaf",
     docs: "",
     discord: "",
     sponsor: "",

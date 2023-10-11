@@ -26,7 +26,7 @@ const page = async () => {
           >
             Aplicação{" "}
             <span
-              className={`max-w-3xl text-5xl font-bold md:text-6xl lg:text-7xl ${textTitle(
+              className={`max-w-3xl text-[3.1rem] font-bold md:text-6xl lg:text-7xl ${textTitle(
                 { color: "violet" }
               )}`}
             >
@@ -185,11 +185,9 @@ const page = async () => {
         </>
       ) : (
         <div>
-          <div className="text-4xl font-bold text-center justify-center flex flex-col items-center gap-3">
-            <p className={textTitle({ color: "violet", size: "lg" })}>
-              Seja bem vindo!
-            </p>
-            <pre>{session?.user?.name}</pre>
+          <div className="font-bold text-center justify-center flex flex-col items-center gap-3">
+            <p className={textTitle({ color: "violet" })}>Seja bem vindo!</p>
+            <pre className="text-2xl">{session?.user?.name}</pre>
             {session?.user?.image === null ? (
               ""
             ) : (
