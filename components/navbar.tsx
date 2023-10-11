@@ -10,12 +10,16 @@ import {
 import { Link } from "@nextui-org/link";
 import { LogIn } from "lucide-react";
 import { link as linkStyles } from "@nextui-org/theme";
-import { siteConfig } from "@/config/site";
+import {
+  siteConfig,
+  siteNavConfigWithSession,
+  siteNavConfigWithoutSession,
+} from "@/config/site";
 import NextLink from "next/link";
 import clsx from "clsx";
 import { ThemeSwitch } from "@/components/theme-switch";
-import { TwitterIcon, GithubIcon, DiscordIcon } from "@/components/icons";
-import LogOutButton from "./LogOutButton";
+import { TwitterIcon, GithubIcon } from "@/components/icons";
+import { LogOutButton, LogOutButtonDropDown } from "./LogOutButton";
 import { auth } from "@/lib/auth";
 
 export const Navbar = async () => {
@@ -78,16 +82,31 @@ export const Navbar = async () => {
       </NavbarContent>
       {/* Parte da direita versão mobile dropdown */}
       <NavbarMenu>
-        <div className="mx-4 mt-2 flex flex-col gap-2 text-zinc-300">
-          {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link color="foreground" href={item.href} size="lg">
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-          <NavbarMenuItem>{session?.user && <LogOutButton />}</NavbarMenuItem>
-        </div>
+        {session?.user ? (
+          <div className="mx-4 mt-2 flex flex-col gap-2 text-zinc-300">
+            {siteNavConfigWithSession.navMenuItems.map((item, index) => (
+              <NavbarMenuItem key={`${item}-${index}`}>
+                {item.label === "Sair" ? (
+                  <LogOutButtonDropDown />
+                ) : (
+                  <Link color="foreground" href={item.href} size="lg">
+                    {item.label}
+                  </Link>
+                )}
+              </NavbarMenuItem>
+            ))}
+          </div>
+        ) : (
+          <div className="mx-4 mt-2 flex flex-col gap-2 text-zinc-300">
+            {siteNavConfigWithoutSession.navMenuItems.map((item, index) => (
+              <NavbarMenuItem key={`${item}-${index}`}>
+                <Link color="foreground" href={item.href} size="lg">
+                  {item.label}
+                </Link>
+              </NavbarMenuItem>
+            ))}
+          </div>
+        )}
       </NavbarMenu>
     </NextUINavbar>
   );

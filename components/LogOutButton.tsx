@@ -4,8 +4,9 @@ import { signOut } from "next-auth/react";
 import { Button } from "./ui/button";
 import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Link } from "@nextui-org/link";
 
-const LogOutButton = () => {
+export const LogOutButton = () => {
   const router = useRouter();
   const handleSignOut = () => {
     signOut();
@@ -16,11 +17,24 @@ const LogOutButton = () => {
       className="text-default-500"
       variant="ghost"
       size="icon"
-      onClick={() => signOut()}
+      onClick={() => handleSignOut()}
     >
-      <LogOut className="text-zinc-500 hover:text-zinc-500 hover:opacity-75 transition-all duration-100" />
+      <LogOut className="text-zinc-400 hover:text-zinc-500 hover:opacity-95 transition-all duration-100 mr-3" />
     </Button>
   );
 };
-
-export default LogOutButton;
+export const LogOutButtonDropDown = () => {
+  const router = useRouter();
+  const handleSignOut = () => {
+    signOut();
+    router.push("/");
+  };
+  return (
+    <Link
+      className="text-foreground cursor-pointer h-7"
+      onClick={() => handleSignOut()}
+    >
+      Sair
+    </Link>
+  );
+};

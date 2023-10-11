@@ -23,3 +23,47 @@ export const siteConfig = {
     sponsor: "",
   },
 };
+export const siteNavConfigWithSession = {
+  navItems: [
+    {
+      label: "Início",
+      href: "/",
+    },
+  ],
+  navMenuItems: [
+    {
+      label: "Perfil",
+      href: "/profile",
+    },
+    {
+      label: "Nova receita",
+      href: "/create/income",
+    },
+    {
+      label: "Nova despesa",
+      href: "/create/expense",
+    },
+    {
+      label: "Metas",
+      href: "/goals",
+    },
+    {
+      label: "Sair",
+      href: "/login",
+    },
+  ],
+};
+export const siteNavConfigWithoutSession = {
+  navItems: [
+    {
+      label: "Início",
+      href: "/",
+    },
+  ],
+  navMenuItems: [
+    {
+      label: "Entrar",
+      href: "/login",
+    },
+  ],
+};
