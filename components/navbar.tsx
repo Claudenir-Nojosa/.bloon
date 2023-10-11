@@ -14,13 +14,13 @@ import { siteConfig } from "@/config/site";
 import NextLink from "next/link";
 import clsx from "clsx";
 import { ThemeSwitch } from "@/components/theme-switch";
-import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
-} from "@/components/icons";
+import { TwitterIcon, GithubIcon, DiscordIcon } from "@/components/icons";
+import { auth } from "@/lib/auth";
+import LogOutButton from "./LogOutButton";
 
-export const Navbar = () => {
+export const Navbar = async () => {
+  const session = await auth();
+
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       {/* Parte da esquerda */}
@@ -63,9 +63,13 @@ export const Navbar = () => {
             <GithubIcon className="text-default-500" />
           </Link>
           <ThemeSwitch />
-          <NextLink href="/login">
-            <LogIn className="text-zinc-500 hover:text-zinc-500 hover:opacity-75 transition-all duration-100"/>
-          </NextLink>
+          {session?.user ? (
+            <LogOutButton />
+          ) : (
+            <NextLink href="/login">
+              <LogIn className="text-zinc-500 hover:text-zinc-500 hover:opacity-75 transition-all duration-100" />
+            </NextLink>
+          )}
         </NavbarItem>
       </NavbarContent>
       {/* Parte da direita versão mobile */}
