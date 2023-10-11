@@ -15,12 +15,11 @@ import NextLink from "next/link";
 import clsx from "clsx";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { TwitterIcon, GithubIcon, DiscordIcon } from "@/components/icons";
-import { auth } from "@/lib/auth";
 import LogOutButton from "./LogOutButton";
+import { auth } from "@/lib/auth";
 
 export const Navbar = async () => {
   const session = await auth();
-
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       {/* Parte da esquerda */}
@@ -82,7 +81,7 @@ export const Navbar = async () => {
       </NavbarContent>
       {/* Parte da direita versão mobile dropdown */}
       <NavbarMenu>
-        <div className="mx-4 mt-2 flex flex-col gap-2">
+        <div className="mx-4 mt-2 flex flex-col gap-2 text-zinc-300">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
@@ -100,6 +99,13 @@ export const Navbar = async () => {
               </Link>
             </NavbarMenuItem>
           ))}
+          <NavbarMenuItem>
+            {session?.user ? (
+              <LogOutButton />
+            ) : (
+              <NextLink href="/login">Entrar</NextLink>
+            )}
+          </NavbarMenuItem>
         </div>
       </NavbarMenu>
     </NextUINavbar>

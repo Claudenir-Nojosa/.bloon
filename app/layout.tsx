@@ -19,8 +19,10 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: "https://github.com/Claudenir-Nojosa/servidor_estaticos/raw/main/site-bloon-favicon.ico",
-    shortcut: "https://github.com/Claudenir-Nojosa/servidor_estaticos/raw/main/site-bloon-favicon.ico",
-    apple: "https://github.com/Claudenir-Nojosa/servidor_estaticos/raw/main/site-bloon-favicon.ico",
+    shortcut:
+      "https://github.com/Claudenir-Nojosa/servidor_estaticos/raw/main/site-bloon-favicon.ico",
+    apple:
+      "https://github.com/Claudenir-Nojosa/servidor_estaticos/raw/main/site-bloon-favicon.ico",
   },
 };
 
@@ -44,7 +46,7 @@ export default function RootLayout({
           >
             <div className="relative flex flex-col h-screen">
               <Navbar />
-              <main className="container mx-auto max-w-7xl pt-7 px-6 flex-grow">
+              <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
                 {children}
               </main>
             </div>

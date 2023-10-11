@@ -16,7 +16,7 @@ const LogOutButton = () => {
       className="text-default-500"
       variant="ghost"
       size="icon"
-      onClick={() => handleSignOut()}
+      onClick={() => signOut()}
     >
       <LogOut className="text-zinc-500 hover:text-zinc-500 hover:opacity-75 transition-all duration-100" />
     </Button>
