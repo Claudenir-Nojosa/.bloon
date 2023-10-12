@@ -19,7 +19,7 @@ export const LogOutButton = () => {
       size="icon"
       onClick={() => handleSignOut()}
     >
-      <LogOut className="text-zinc-400 hover:text-zinc-500 hover:opacity-95 transition-all duration-100 mr-3" />
+      <LogOut className="dark:text-zinc-400 text-zinc-500 hover:text-zinc-400 dark:hover:text-zinc-500 hover:opacity-95 transition-all duration-100 mr-3" />
     </Button>
   );
 };
