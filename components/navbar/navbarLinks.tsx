@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 export const navbarLinks = () => {
   return (
-    <ul className="hidden lg:flex gap-4 justify-start ml-2">
+    <ul className="hidden md:flex gap-4 justify-start ml-2">
       {siteConfig.navItems.map((item) => (
         <NavbarItem key={item.href}>
           <NextLink

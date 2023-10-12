@@ -1,6 +1,6 @@
-import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import { auth } from "@/lib/auth";
-import { title as textTitle } from "@/components/primitives";
+import { title as textTitle } from "@/components/shared/primitives";
 import React from "react";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";

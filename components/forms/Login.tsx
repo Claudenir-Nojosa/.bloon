@@ -18,11 +18,11 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { LoginSchema } from "@/lib/validations/user";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
-import { title as textTitle } from "../primitives";
+import { title as textTitle } from "../shared/primitives";
 import Image from "next/image";
-import MaxWidthWrapper from "../MaxWidthWrapper";
+import MaxWidthWrapper from "../shared/MaxWidthWrapper";
 import { LockKeyhole } from "lucide-react";
-import { GithubIcon, GoogleIcon } from "../icons";
+import { GithubIcon, GoogleIcon } from "../shared/icons";
 
 const LoginForm = () => {
   const session = useSession();

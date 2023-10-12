@@ -18,10 +18,10 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { RegisterSchema } from "@/lib/validations/user";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
-import { title as textTitle } from "../primitives";
-import MaxWidthWrapper from "../MaxWidthWrapper";
+import { title as textTitle } from "../shared/primitives";
+import MaxWidthWrapper from "../shared/MaxWidthWrapper";
 import Image from "next/image";
-import { GithubIcon, GoogleIcon } from "../icons";
+import { GithubIcon, GoogleIcon } from "../shared/icons";
 const RegisterForm = () => {
   const router = useRouter();
   const form = useForm<z.infer<typeof RegisterSchema>>({

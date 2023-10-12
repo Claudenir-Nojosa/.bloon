@@ -30,6 +30,16 @@ export const siteNavConfigWithSession = {
       href: "/",
     },
   ],
+  navLeftMenuItems: [
+    {
+      label: "Perfil",
+      href: "/profile",
+    },
+    {
+      label: "Sair",
+      href: "/login",
+    },
+  ],
   navMenuItems: [
     {
       imgURL: "/assets/income.svg",

@@ -17,9 +17,9 @@ import {
 } from "@/config/site";
 import NextLink from "next/link";
 import clsx from "clsx";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { TwitterIcon, GithubIcon } from "@/components/icons";
-import { LogOutButton, LogOutButtonDropDown } from "./LogOutButton";
+import { ThemeSwitch } from "@/components/shared/theme-switch";
+import { TwitterIcon, GithubIcon } from "@/components/shared/icons";
+import { LogOutButton, LogOutButtonDropDown } from "@/components/LogOutButton";
 import { auth } from "@/lib/auth";
 import { navbarLinks } from "./navbarLinks";
 
@@ -70,7 +70,7 @@ export const Navbar = async () => {
       <NavbarMenu>
         {session?.user ? (
           <div className="mx-4 mt-2 flex flex-col gap-2 text-zinc-300">
-            {siteNavConfigWithSession.navMenuItems.map((item, index) => (
+            {siteNavConfigWithSession.navLeftMenuItems.map((item, index) => (
               <NavbarMenuItem key={`${item}-${index}`}>
                 {item.label === "Sair" ? (
                   <LogOutButtonDropDown />

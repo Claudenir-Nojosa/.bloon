@@ -3,10 +3,10 @@ import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { ThemeProvider } from "../components/providers/theme.provider";
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components/navbar/navbar";
 import clsx from "clsx";
 import { AuthProvider } from "@/components/providers/auth.provider";
-import BottomBar from "@/components/BottomBar";
+import BottomBar from "@/components/shared/BottomBar";
 import { auth } from "@/lib/auth";
 
 export const metadata: Metadata = {
