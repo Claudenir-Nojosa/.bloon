@@ -6,6 +6,8 @@ import { ThemeProvider } from "../components/providers/theme.provider";
 import { Navbar } from "@/components/navbar";
 import clsx from "clsx";
 import { AuthProvider } from "@/components/providers/auth.provider";
+import BottomBar from "@/components/BottomBar";
+import { auth } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: {
@@ -26,11 +28,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -46,9 +49,10 @@ export default function RootLayout({
           >
             <div className="relative flex flex-col h-screen">
               <Navbar />
-              <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+              <main className="container mx-auto max-w-7xl pt-8 px-6 flex-grow">
                 {children}
               </main>
+              {session?.user.id ? <BottomBar /> : ""}
             </div>
           </ThemeProvider>
         </body>

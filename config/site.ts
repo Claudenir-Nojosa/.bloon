@@ -32,22 +32,27 @@ export const siteNavConfigWithSession = {
   ],
   navMenuItems: [
     {
-      label: "Perfil",
-      href: "/profile",
-    },
-    {
-      label: "Nova receita",
+      imgURL: "/assets/income.svg",
+      label: "Receita",
       href: "/create/income",
     },
     {
-      label: "Nova despesa",
+      imgURL: "/assets/expense.svg",
+      label: "Despesa",
       href: "/create/expense",
     },
     {
+      imgURL: "/assets/home.svg",
+      label: "Início",
+      href: "/",
+    },
+    {
+      imgURL: "/assets/goal.svg",
       label: "Metas",
       href: "/goals",
     },
     {
+      imgURL: "/assets/logout.svg",
       label: "Sair",
       href: "/login",
     },
