@@ -29,6 +29,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "types/**/*.ts"
-  ],
+, "app/api/incomes/create/route.js"  ],
   "exclude": ["node_modules"]
 }

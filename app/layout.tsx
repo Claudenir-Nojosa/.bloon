@@ -8,6 +8,8 @@ import clsx from "clsx";
 import { AuthProvider } from "@/components/providers/auth.provider";
 import BottomBar from "@/components/shared/BottomBar";
 import { auth } from "@/lib/auth";
+import { QueryProvider } from "@/components/providers/query.provider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: {
@@ -37,26 +39,29 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
-      <AuthProvider>
-        <body
-          className={clsx(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
-          )}
-        >
-          <ThemeProvider
-            themeProps={{ attribute: "class", defaultTheme: "dark" }}
+      <QueryProvider>
+        <Toaster richColors />
+        <AuthProvider>
+          <body
+            className={clsx(
+              "min-h-screen bg-background font-sans antialiased",
+              fontSans.variable
+            )}
           >
-            <div className="relative flex flex-col h-screen">
-              <Navbar />
-              <main className="container mx-auto max-w-7xl pt-8 px-6 flex-grow">
-                {children}
-              </main>
-              {session?.user.id ? <BottomBar /> : ""}
-            </div>
-          </ThemeProvider>
-        </body>
-      </AuthProvider>
+            <ThemeProvider
+              themeProps={{ attribute: "class", defaultTheme: "dark" }}
+            >
+              <div className="relative flex flex-col h-screen">
+                <Navbar />
+                <main className="container mx-auto max-w-7xl pt-8 px-6 flex-grow">
+                  {children}
+                </main>
+                {session?.user.id ? <BottomBar /> : ""}
+              </div>
+            </ThemeProvider>
+          </body>
+        </AuthProvider>
+      </QueryProvider>
     </html>
   );
 }
