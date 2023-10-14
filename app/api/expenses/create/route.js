@@ -11,6 +11,7 @@ export async function POST(req) {
       data: {
         description: body.description,
         value: body.value,
+        date: body.date,
         User: {
           connect: {
             id: session.user.id,

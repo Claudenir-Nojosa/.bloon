@@ -13,6 +13,7 @@ export async function GET() {
         id: true,
         description: true,
         value: true,
+        date: true,
         IncomeTag: true,
         User: true,
       },

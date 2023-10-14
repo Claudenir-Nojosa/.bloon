@@ -14,6 +14,7 @@ export async function GET() {
         userId: true,
         updatedAt: true,
         description: true,
+        date: true,
       },
       orderBy: {
         updatedAt: "desc",
@@ -29,6 +30,7 @@ export async function GET() {
         userId: true,
         updatedAt: true,
         description: true,
+        date: true,
       },
       orderBy: {
         updatedAt: "desc",
@@ -41,7 +43,7 @@ export async function GET() {
     const combinedData = [...incomes, ...expenses];
 
     combinedData.sort((a, b) => {
-      return new Date(b.updatedAt) - new Date(a.updatedAt);
+      return new Date(b.date) - new Date(a.date);
     });
 
     return NextResponse.json({ combinedData }, { status: 200 });

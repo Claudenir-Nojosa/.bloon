@@ -11,4 +11,8 @@ export const IncomeSchema = z.object({
     })
     .gte(1, { message: "Insira o valor da receita" }),
   incomeTagId: z.string({ required_error: "Selecione uma opção." }),
+  date: z.date({
+    required_error: "Selecione uma data",
+    invalid_type_error: "Isso não é uma data!",
+  }),
 });
