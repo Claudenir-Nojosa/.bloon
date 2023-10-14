@@ -1,7 +1,7 @@
 import React from "react";
 
 const Goals = () => {
-  return <div>Goals</div>;
+  return <div>Página será construída ainda...</div>;
 };
 
 export default Goals;
