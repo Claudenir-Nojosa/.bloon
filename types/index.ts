@@ -7,5 +7,10 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 export type FormInputExpense = {
   description: string;
   value: number;
-  tagId: string;
+  expenseTagId: string;
+};
+export type FormInputIncome = {
+  description: string;
+  value: number;
+  incomeTagId: string;
 };

@@ -90,7 +90,8 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
   }
   const defaultValue =
     initialValue && dataExpenseTags
-      ? dataExpenseTags.find((tag) => tag.id === initialValue.tagId)?.name || ""
+      ? dataExpenseTags.find((tag) => tag.id === initialValue.expenseTagId)
+          ?.name || ""
       : "Selecione";
   return (
     <Card className="border rounded-2xl p-2 pb-2 mt-6 min-w-[20rem]">
@@ -152,7 +153,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
                       defaultValue={
                         initialValue && dataExpenseTags
                           ? dataExpenseTags.find(
-                              (tag) => tag.id === initialValue.tagId
+                              (tag) => tag.id === initialValue.expenseTagId
                             )?.name || ""
                           : ""
                       }

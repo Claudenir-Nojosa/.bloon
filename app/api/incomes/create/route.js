@@ -16,6 +16,11 @@ export async function POST(req) {
             id: session.user.id,
           },
         },
+        IncomeTag: {
+          connect: {
+            id: body.incomeTagId,
+          },
+        },
       },
     });
     return NextResponse.json(income, { status: 200 });

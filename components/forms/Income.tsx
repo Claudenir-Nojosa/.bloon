@@ -15,20 +15,49 @@ import {
 import { Input } from "../ui/input";
 import { IncomeSchema } from "@/lib/validations/income";
 import Link from "next/link";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Income } from "@prisma/client";
+import { Income, IncomeTag } from "@prisma/client";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import Image from "next/image";
+import { FC, useEffect } from "react";
+import { FormInputIncome } from "@/types";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
-export const IncomeForm = () => {
+interface FormIncomeProps {
+  initialValue?: FormInputIncome;
+  params: {
+    id: string;
+  };
+}
+
+export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
   const form = useForm<z.infer<typeof IncomeSchema>>({
     resolver: zodResolver(IncomeSchema),
   });
+  const { id } = params;
   const router = useRouter();
 
+  useEffect(() => {
+    if (initialValue) {
+      // Define os valores iniciais no formulário após a montagem do componente
+      form.reset(initialValue);
+    }
+  }, [initialValue]);
+
+  // fetch income tags
+  const { data: dataIncomeTags, isLoading: isLoadingIncomeTags } = useQuery<
+    IncomeTag[]
+  >({
+    queryKey: ["incomeTags"],
+    queryFn: async () => {
+      const response = await axios.get("/api/incomes/tags");
+      return response.data;
+    },
+  });
+  console.log(dataIncomeTags);
   const { mutate: createIncome, isLoading } = useMutation<
     Income,
     unknown,
@@ -51,7 +80,11 @@ export const IncomeForm = () => {
     createIncome(data);
     console.log(data);
   }
-
+  const defaultValue =
+    initialValue && dataIncomeTags
+      ? dataIncomeTags.find((tag) => tag.id === initialValue.incomeTagId)
+          ?.name || ""
+      : "Selecione";
   return (
     <Card className="border rounded-2xl p-2 pb-2 mt-6 min-w-[20rem]">
       <Form {...form}>
@@ -95,6 +128,40 @@ export const IncomeForm = () => {
                       {...field}
                       onChange={(event) => field.onChange(+event.target.value)}
                     />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="incomeTagId"
+              render={({ field }) => (
+                <FormItem className="mt-4">
+                  <FormLabel>Categoria</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={
+                        initialValue && dataIncomeTags
+                          ? dataIncomeTags.find(
+                              (tag) => tag.id === initialValue.incomeTagId
+                            )?.name || ""
+                          : ""
+                      }
+                    >
+                      <SelectTrigger className="w-full text-zinc-400">
+                        <SelectValue placeholder={`${defaultValue}`} />
+                      </SelectTrigger>
+
+                      <SelectContent className="bg-black text-zinc-300">
+                        {dataIncomeTags?.map((item) => (
+                          <SelectItem key={item.id} value={item.id}>
+                            {item.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
