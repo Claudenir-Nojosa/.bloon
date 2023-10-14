@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Link from "next/link";
 import React, { FC } from "react";
+import dayjs from "dayjs";
 
 export interface Transactions {
   id: string;
@@ -30,6 +31,11 @@ const Dashboard: FC<Transactions> = () => {
   );
   console.log(dataTransactions);
 
+  const formattedTransactions = dataTransactions?.map((item) => ({
+    ...item,
+    updatedAt: dayjs(item.updatedAt).format("DD/MM/YYYY"),
+  }));
+
   return (
     <MaxWidthWrapper className="max-w-xl mb-12 sm:mt-15 flex flex-col items-center justify-center text-center">
       <div>
@@ -46,9 +52,11 @@ const Dashboard: FC<Transactions> = () => {
         </div>
       </div>
       <ul>
-        {dataTransactions && dataTransactions.length > 0 ? (
+        {isLoadingTransactions ? (
+          <p>Carregando...</p>
+        ) : formattedTransactions && formattedTransactions.length > 0 ? (
           <ul>
-            {dataTransactions.map((item: Transactions) => (
+            {formattedTransactions.map((item) => (
               <li key={item.id}>
                 {item.description} - {item.value} - {item.updatedAt}
               </li>
