@@ -34,7 +34,7 @@ const IncomeCard: FC<IncomeCardProps> = ({ income }) => {
       <CardContent className="pb-0">{value}</CardContent>
       <CardFooter>
         <Button variant="outline">
-          <Link href={`/expenses/1`} className="hover:underline">
+          <Link href={`/incomes/1`} className="hover:underline">
             Saiba mais...
           </Link>
         </Button>

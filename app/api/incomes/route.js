@@ -25,11 +25,10 @@ export async function GET() {
     });
     return NextResponse.json({ incomes }, { status: 200 });
   } catch (error) {
-    console.log(error);
-    if (error)
-      return NextResponse.json(
-        { message: "Could not fetch incomes" },
-        { status: 500 }
-      );
+    console.log("Deu erro no fetch dos incomes:", error);
+    return NextResponse.json(
+      { message: "Could not fetch incomes" },
+      { status: 500 }
+    );
   }
 }
