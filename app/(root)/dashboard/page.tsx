@@ -13,6 +13,7 @@ export interface Transactions {
   id: string;
   description: string;
   value: number;
+  date: Date;
   userId: string;
   updatedAt: string;
   Income: Income;
@@ -33,7 +34,7 @@ const Dashboard: FC<Transactions> = () => {
 
   const formattedTransactions = dataTransactions?.map((item) => ({
     ...item,
-    updatedAt: dayjs(item.updatedAt).format("DD/MM/YYYY"),
+    date: dayjs(item.date).format("DD/MM/YYYY"),
   }));
 
   return (
@@ -58,7 +59,7 @@ const Dashboard: FC<Transactions> = () => {
           <ul>
             {formattedTransactions.map((item) => (
               <li key={item.id}>
-                {item.description} - {item.value} - {item.updatedAt}
+                {item.description} - {item.value} - {item.date}
               </li>
             ))}
           </ul>
