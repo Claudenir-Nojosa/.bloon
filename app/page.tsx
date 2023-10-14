@@ -200,7 +200,7 @@ const page = async () => {
               />
             )}
             <Button
-              className="mt-10 hover:text-zinc-400 rounded-2xl border border-purple-800"
+              className="mt-10 rounded-2xl border border-purple-900"
               variant="outline"
             >
               <Link href="/dashboard">Verificar carteira!</Link>
