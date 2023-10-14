@@ -203,7 +203,7 @@ const page = async () => {
               className="mt-10 hover:text-zinc-400 rounded-2xl border border-purple-800"
               variant="outline"
             >
-              <Link href="/create">Começar a criação!</Link>
+              <Link href="/dashboard">Verificar carteira!</Link>
             </Button>
           </div>
         </div>

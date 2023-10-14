@@ -1,6 +1,6 @@
 import { NavbarItem } from "@nextui-org/navbar";
 import { link as linkStyles } from "@nextui-org/theme";
-import { siteConfig, siteNavConfigWithSession } from "@/config/site";
+import { siteNavConfigWithSession } from "@/config/site";
 import NextLink from "next/link";
 import clsx from "clsx";
 

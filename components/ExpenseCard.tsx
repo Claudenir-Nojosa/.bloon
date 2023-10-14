@@ -32,8 +32,8 @@ const ExpenseCard: FC<ExpenseCardProps> = ({ expense }) => {
           Categoria: {ExpenseTag.name}
         </CardDescription>
       </CardHeader>
-      <CardContent className="pb-0 text-green-700 font-semibold">
-        R$ {value}
+      <CardContent className="pb-0 text-red-700 font-semibold">
+        -R$ {value}
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
         <Button variant="ghost" size="icon" className="hover:text-[#9633d9]">
