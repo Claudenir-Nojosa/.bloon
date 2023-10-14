@@ -16,6 +16,11 @@ export async function POST(req) {
             id: session.user.id,
           },
         },
+        ExpenseTag: {
+          connect: {
+            id: body.expenseTagId,
+          },
+        },
       },
     });
     return NextResponse.json(expense, { status: 200 });

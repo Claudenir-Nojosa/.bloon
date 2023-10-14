@@ -1,13 +1,13 @@
 import { NavbarItem } from "@nextui-org/navbar";
 import { link as linkStyles } from "@nextui-org/theme";
-import { siteConfig } from "@/config/site";
+import { siteConfig, siteNavConfigWithSession } from "@/config/site";
 import NextLink from "next/link";
 import clsx from "clsx";
 
 export const navbarLinks = () => {
   return (
     <ul className="hidden md:flex gap-4 justify-start ml-2">
-      {siteConfig.navItems.map((item) => (
+      {siteNavConfigWithSession.navItems.map((item) => (
         <NavbarItem key={item.href}>
           <NextLink
             className={clsx(

@@ -10,4 +10,5 @@ export const ExpenseSchema = z.object({
       invalid_type_error: "Valor tem que ser um número",
     })
     .gte(1, { message: "Insira o valor da despesa" }),
+  expenseTagId: z.string({ required_error: "Selecione uma opção." }),
 });

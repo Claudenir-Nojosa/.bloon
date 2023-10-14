@@ -29,11 +29,27 @@ export const siteNavConfigWithSession = {
       label: "Início",
       href: "/",
     },
+    {
+      label: "Dashboard",
+      href: "/dashboard",
+    },
+    {
+      label: "Receita",
+      href: "/create/income",
+    },
+    {
+      label: "Despesa",
+      href: "/create/expense",
+    },
+    {
+      label: "Metas",
+      href: "/goals",
+    },
   ],
   navLeftMenuItems: [
     {
-      label: "Perfil",
-      href: "/profile",
+      label: "Dashboard",
+      href: "/dashboard",
     },
     {
       label: "Sair",

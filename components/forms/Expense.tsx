@@ -14,20 +14,57 @@ import {
 } from "@/components/ui/form";
 import { Input } from "../ui/input";
 import Link from "next/link";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Expense } from "@prisma/client";
+import { Expense, ExpenseTag } from "@prisma/client";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import Image from "next/image";
 import { ExpenseSchema } from "@/lib/validations/expense";
+import { FormInputExpense } from "@/types";
+import { FC, useEffect } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../components/ui/select";
 
-export const ExpenseForm = () => {
+interface FormExpenseProps {
+  initialValue?: FormInputExpense;
+  params: {
+    id: string;
+  };
+}
+
+export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
   const form = useForm<z.infer<typeof ExpenseSchema>>({
     resolver: zodResolver(ExpenseSchema),
+    defaultValues: initialValue,
   });
+  const { id } = params;
   const router = useRouter();
+
+  useEffect(() => {
+    if (initialValue) {
+      // Define os valores iniciais no formulário após a montagem do componente
+      form.reset(initialValue);
+    }
+  }, [initialValue]);
+
+  // fetch expense tags
+  const { data: dataExpenseTags, isLoading: isLoadingExpenseTags } = useQuery<
+    ExpenseTag[]
+  >({
+    queryKey: ["expenseTags"],
+    queryFn: async () => {
+      const response = await axios.get("/api/expenses/tags");
+      return response.data;
+    },
+  });
+  console.log(dataExpenseTags);
 
   const { mutate: createExpense, isLoading } = useMutation<
     Expense,
@@ -51,7 +88,10 @@ export const ExpenseForm = () => {
     createExpense(data);
     console.log(data);
   }
-
+  const defaultValue =
+    initialValue && dataExpenseTags
+      ? dataExpenseTags.find((tag) => tag.id === initialValue.tagId)?.name || ""
+      : "Selecione";
   return (
     <Card className="border rounded-2xl p-2 pb-2 mt-6 min-w-[20rem]">
       <Form {...form}>
@@ -95,6 +135,40 @@ export const ExpenseForm = () => {
                       {...field}
                       onChange={(event) => field.onChange(+event.target.value)}
                     />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="expenseTagId"
+              render={({ field }) => (
+                <FormItem className="mt-4">
+                  <FormLabel>Categoria</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={
+                        initialValue && dataExpenseTags
+                          ? dataExpenseTags.find(
+                              (tag) => tag.id === initialValue.tagId
+                            )?.name || ""
+                          : ""
+                      }
+                    >
+                      <SelectTrigger className="w-full text-zinc-400">
+                        <SelectValue placeholder={`${defaultValue}`} />
+                      </SelectTrigger>
+
+                      <SelectContent className="bg-black text-zinc-300">
+                        {dataExpenseTags?.map((item) => (
+                          <SelectItem key={item.id} value={item.id}>
+                            {item.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
