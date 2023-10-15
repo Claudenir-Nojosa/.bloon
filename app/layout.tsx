@@ -53,7 +53,7 @@ export default async function RootLayout({
             >
               <div className="relative flex flex-col h-screen">
                 <Navbar />
-                <main className="container mx-auto max-w-7xl pt-8 px-6 flex-grow">
+                <main className="container mx-auto max-w-7xl px-6 flex-grow">
                   {children}
                 </main>
                 {session?.user.id ? <BottomBar /> : ""}

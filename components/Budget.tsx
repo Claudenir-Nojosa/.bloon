@@ -3,6 +3,10 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import numeral from "numeral";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export interface Transactions {
   id: string;
@@ -44,11 +48,43 @@ const Budget = () => {
   );
   const difference = incomeTotal - expenseTotal;
   const formattedDifference = numeral(difference).format("0,0.00");
+
+  const colorClass = difference > 0 ? "text-green-700" : "text-red-700";
+
+  const data = {
+    labels: ["Receita", "Despesa"],
+    datasets: [
+      {
+        label: "R$",
+        data: [incomeTotal, expenseTotal],
+        backgroundColor: ["rgb(9, 121, 105)", "rgb(199, 0, 57)"],
+        borderColor: ["rgb(9, 121, 105)", "rgb(199, 0, 57)"],
+      },
+    ],
+    hoverOffset: 40,
+  };
+  const options = {};
   return (
-    <div>
-      <p>Saldo Atual: R$ {formattedDifference}</p>
-      <p>Total de Receitas: R$ {numeral(incomeTotal).format("0,0.00")}</p>
-      <p>Total de Despesas: R$ {numeral(expenseTotal).format("0,0.00")}</p>
+    <div className="font-semibold text-lg">
+      <p>
+        Saldo Atual:{" "}
+        <span className={colorClass}>R$ {formattedDifference}</span>
+      </p>
+      <p>
+        Total de Receitas:{" "}
+        <span className="dark:text-green-200 text-green-500 font-normal">
+          R$ {numeral(incomeTotal).format("0,0.00")}
+        </span>
+      </p>
+      <p>
+        Total de Despesas:{" "}
+        <span className="dark:text-red-200 text-red-700 ">
+          R$ {numeral(expenseTotal).format("0,0.00")}
+        </span>
+      </p>
+      <div className="mt-4 mb-20">
+        <Doughnut data={data} options={options} />
+      </div>
     </div>
   );
 };
