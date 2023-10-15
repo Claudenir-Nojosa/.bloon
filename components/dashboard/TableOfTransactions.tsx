@@ -21,6 +21,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import numeral from "numeral";
+import Link from "next/link";
+import ButtonAction from "../ButtonAction";
 
 export interface Transactions {
   id: string;
@@ -125,17 +127,7 @@ export const TableOfTransactions = () => {
                   R$ {numeral(transaction.value).format("0,0.00")}
                 </TableCell>
                 <TableCell className="flex gap-5 justify-center">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger>...</DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
-                        Editar
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
-                        Excluir
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <ButtonAction isIncome={true} id={transaction.id} />
                 </TableCell>
               </TableRow>
             ))}
@@ -168,17 +160,7 @@ export const TableOfTransactions = () => {
                   R$ {numeral(transaction.value).format("0,0.00")}
                 </TableCell>
                 <TableCell className="flex gap-5 justify-center">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger>...</DropdownMenuTrigger>
-                    <DropdownMenuContent className="bg-red-200">
-                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
-                        Editar
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
-                        Excluir
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <ButtonAction isIncome={false} id={transaction.id} />
                 </TableCell>
               </TableRow>
             ))}
@@ -214,17 +196,11 @@ export const TableOfTransactions = () => {
                   R$ {numeral(transaction.value).format("0,0.00")}
                 </TableCell>
                 <TableCell className="flex gap-5 justify-center">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger>...</DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
-                        Editar
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
-                        Excluir
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  {transaction.expenseTagId ? (
+                    <ButtonAction isIncome={false} id={transaction.id} />
+                  ) : (
+                    <ButtonAction isIncome={true} id={transaction.id} />
+                  )}
                 </TableCell>
               </TableRow>
             ))}
