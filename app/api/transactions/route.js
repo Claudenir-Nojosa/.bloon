@@ -15,6 +15,7 @@ export async function GET() {
         updatedAt: true,
         description: true,
         date: true,
+        expenseTagId: true,
       },
       orderBy: {
         updatedAt: "desc",
@@ -31,6 +32,7 @@ export async function GET() {
         updatedAt: true,
         description: true,
         date: true,
+        incomeTagId: true,
       },
       orderBy: {
         updatedAt: "desc",
