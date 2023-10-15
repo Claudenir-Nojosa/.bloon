@@ -180,65 +180,65 @@ export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="date"
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel className="mt-5">Data da despesa</FormLabel>
-                  <Popover
-                    open={isCalendarOpen}
-                    onOpenChange={setIsCalendarOpen}
-                  >
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                          )}
-                        >
-                          {field.value ? (
-                            format(field.value, "PPP", { locale: ptBR })
-                          ) : (
-                            <span className="text-zinc-400">
-                              Selecione uma data
-                            </span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={field.value}
-                        onSelect={(e) => {
-                          field.onChange(e);
-                          setIsCalendarOpen(false);
-                        }}
-                        disabled={(date) =>
-                          date > new Date() || date < new Date("1900-01-01")
-                        }
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </FormItem>
-              )}
-            />
-          </CardBody>
-          <CardFooter className="flex text-center items-center justify-end">
-            <div className="flex justify-end gap-2">
-              <Button variant="outline">
-                <Link href="/">Cancelar</Link>
-              </Button>
-              <Button variant="outline" type="submit">
-                Criar
-              </Button>
+            <div className="flex gap-2 justify-start items-end">
+              <FormField
+                control={form.control}
+                name="date"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel className="mt-5">Data da despesa</FormLabel>
+                    <Popover
+                      open={isCalendarOpen}
+                      onOpenChange={setIsCalendarOpen}
+                    >
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-[240px] pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP", { locale: ptBR })
+                            ) : (
+                              <span className="text-zinc-400">
+                                Selecione uma data
+                              </span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date("1900-01-01")
+                          }
+                          initialFocus
+                          onSelect={(e) => {
+                            field.onChange(e);
+                            setIsCalendarOpen(false);
+                          }}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </FormItem>
+                )}
+              />
+              <div className="justify-end flex w-full gap-4">
+                <Button variant="outline">
+                  <Link href="/">Cancelar</Link>
+                </Button>
+                <Button variant="outline" type="submit">
+                  Criar
+                </Button>
+              </div>
             </div>
-          </CardFooter>
+          </CardBody>
         </form>
       </Form>
     </Card>
