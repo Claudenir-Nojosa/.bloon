@@ -23,6 +23,7 @@ import {
 import numeral from "numeral";
 import Link from "next/link";
 import ButtonAction from "../ButtonAction";
+import { Search } from "lucide-react";
 
 export interface Transactions {
   id: string;
@@ -47,7 +48,6 @@ export const TableOfTransactions = () => {
       },
     }
   );
-  console.log(dataTransactions);
 
   const combinedData = dataTransactions?.map((item) => ({
     ...item,
@@ -127,7 +127,12 @@ export const TableOfTransactions = () => {
                   R$ {numeral(transaction.value).format("0,0.00")}
                 </TableCell>
                 <TableCell className="flex gap-5 justify-center">
-                  <ButtonAction isIncome={true} id={transaction.id} />
+                  <Link
+                    href={`/incomes/${transaction.id}`}
+                    className="hover:text-[#9633d9]"
+                  >
+                    <Search />
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -160,7 +165,12 @@ export const TableOfTransactions = () => {
                   R$ {numeral(transaction.value).format("0,0.00")}
                 </TableCell>
                 <TableCell className="flex gap-5 justify-center">
-                  <ButtonAction isIncome={false} id={transaction.id} />
+                  <Link
+                    href={`/expenses/${transaction.id}`}
+                    className="hover:text-[#9633d9]"
+                  >
+                    <Search />
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -196,10 +206,20 @@ export const TableOfTransactions = () => {
                   R$ {numeral(transaction.value).format("0,0.00")}
                 </TableCell>
                 <TableCell className="flex gap-5 justify-center">
-                  {transaction.expenseTagId ? (
-                    <ButtonAction isIncome={false} id={transaction.id} />
+                  {transaction.incomeTagId ? (
+                    <Link
+                      href={`/incomes/${transaction.id}`}
+                      className="hover:text-[#9633d9]"
+                    >
+                      <Search />
+                    </Link>
                   ) : (
-                    <ButtonAction isIncome={true} id={transaction.id} />
+                    <Link
+                      href={`/expenses/${transaction.id}`}
+                      className="hover:text-[#9633d9]"
+                    >
+                      <Search />
+                    </Link>
                   )}
                 </TableCell>
               </TableRow>

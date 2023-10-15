@@ -9,6 +9,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
+import ButtonAction from "@/components/ButtonAction";
+import numeral from "numeral";
+import { title } from "@/components/shared/primitives";
 
 interface TransactionDetailPageProps {
   params: {
@@ -26,27 +29,46 @@ async function getExpense(id: string) {
       description: true,
       value: true,
       date: true,
-      expenseTagId: true,
+      ExpenseTag: true,
     },
   });
   return response;
 }
 
-const ExpenseDetailPage: FC<TransactionDetailPageProps> = async ({ params }) => {
+const ExpenseDetail: FC<TransactionDetailPageProps> = async ({ params }) => {
   const transaction = await getExpense(params.id);
 
   return (
     <MaxWidthWrapper>
       <Card className="min-w-full">
         <CardHeader>
-          <CardTitle>{transaction?.description}</CardTitle>
-          <CardDescription className="text-zinc-400">
-            {transaction?.value}
+          <CardTitle className="flex">
+            <h2 className={title({ color: "violet", size: "sm" })}>
+              Descrição da Despesa:{" "}
+              <span className="text-foreground">
+                {transaction?.description}
+              </span>
+            </h2>
+          </CardTitle>
+          <CardDescription className="flex text-lg">
+            <div className="flex-col flex gap-6 mt-4">
+              <h4 className="text-zinc-500 ">
+                Categoria: {transaction?.ExpenseTag.name}
+              </h4>
+            </div>
           </CardDescription>
         </CardHeader>
+        <CardContent>
+          <h4>
+            Valor da Despesa: R$ {numeral(transaction?.value).format("0,0.00")}
+          </h4>
+        </CardContent>
+        <CardFooter className="justify-end">
+          <ButtonAction isIncome={false} id={params.id} />
+        </CardFooter>
       </Card>
     </MaxWidthWrapper>
   );
 };
 
-export default ExpenseDetailPage;
+export default ExpenseDetail;

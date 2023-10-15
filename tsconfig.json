@@ -28,7 +28,11 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "types/**/*.ts"
-, "app/api/incomes/create/route.js", "app/api/incomes/route.js", "app/api/transactions/route.js", "app/api/expenses/[expenseId]/route.ts"  ],
+    "types/**/*.ts",
+    "app/api/incomes/create/route.js",
+    "app/api/incomes/route.js",
+    "app/api/transactions/route.js",
+    "app/api/expenses/[id]/route.ts"
+  ],
   "exclude": ["node_modules"]
 }

@@ -9,6 +9,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
+import ButtonAction from "@/components/ButtonAction";
+import { title } from "@/components/shared/primitives";
+import numeral from "numeral";
 
 interface TransactionDetailPageProps {
   params: {
@@ -27,6 +30,7 @@ async function getIncome(id: string) {
       value: true,
       date: true,
       incomeTagId: true,
+      IncomeTag: true,
     },
   });
   return response;
@@ -39,11 +43,30 @@ const IncomeDetailPage: FC<TransactionDetailPageProps> = async ({ params }) => {
     <MaxWidthWrapper>
       <Card className="min-w-full">
         <CardHeader>
-          <CardTitle>{transaction?.description}</CardTitle>
-          <CardDescription className="text-zinc-400">
-            {transaction?.value}
+          <CardTitle className="flex">
+            <h2 className={title({ color: "violet", size: "sm" })}>
+              Descrição da Receita:{" "}
+              <span className="text-foreground">
+                {transaction?.description}
+              </span>
+            </h2>
+          </CardTitle>
+          <CardDescription className="flex text-lg">
+            <div className="flex-col flex gap-6 mt-4">
+              <h4 className="text-zinc-500 ">
+                Categoria: {transaction?.IncomeTag.name}
+              </h4>
+            </div>
           </CardDescription>
         </CardHeader>
+        <CardContent>
+          <h4>
+            Valor da Receita: R$ {numeral(transaction?.value).format("0,0.00")}
+          </h4>
+        </CardContent>
+        <CardFooter className="justify-end">
+          <ButtonAction isIncome={true} id={params.id} />
+        </CardFooter>
       </Card>
     </MaxWidthWrapper>
   );

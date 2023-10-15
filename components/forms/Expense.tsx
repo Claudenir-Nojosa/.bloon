@@ -73,7 +73,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
       return response.data;
     },
   });
-  console.log(dataExpenseTags);
+
 
   const { mutate: createExpense, isLoading } = useMutation<
     Expense,
@@ -95,7 +95,6 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
   });
   function onSubmit(data: z.infer<typeof ExpenseSchema>) {
     createExpense(data);
-    console.log(data);
   }
   const defaultValue =
     initialValue && dataExpenseTags

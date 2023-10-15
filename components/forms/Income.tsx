@@ -70,7 +70,6 @@ export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
       return response.data;
     },
   });
-  console.log(dataIncomeTags);
   const { mutate: createIncome, isLoading } = useMutation<
     Income,
     unknown,
