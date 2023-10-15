@@ -24,7 +24,7 @@ import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import Image from "next/image";
 import { ExpenseSchema } from "@/lib/validations/expense";
 import { FormInputExpense } from "@/types";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -47,6 +47,8 @@ interface FormExpenseProps {
 }
 
 export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
   const form = useForm<z.infer<typeof ExpenseSchema>>({
     resolver: zodResolver(ExpenseSchema),
     defaultValues: initialValue,
@@ -188,7 +190,10 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel className="mt-5">Data da despesa</FormLabel>
-                  <Popover>
+                  <Popover
+                    open={isCalendarOpen}
+                    onOpenChange={setIsCalendarOpen}
+                  >
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
@@ -213,11 +218,14 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
                       <Calendar
                         mode="single"
                         selected={field.value}
-                        onSelect={field.onChange}
                         disabled={(date) =>
                           date > new Date() || date < new Date("1900-01-01")
                         }
                         initialFocus
+                        onSelect={(e) => {
+                          field.onChange(e);
+                          setIsCalendarOpen(false);
+                        }}
                       />
                     </PopoverContent>
                   </Popover>

@@ -22,9 +22,15 @@ import { toast } from "sonner";
 import { Income, IncomeTag } from "@prisma/client";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import Image from "next/image";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { FormInputIncome } from "@/types";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
@@ -40,6 +46,7 @@ interface FormIncomeProps {
 }
 
 export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const form = useForm<z.infer<typeof IncomeSchema>>({
     resolver: zodResolver(IncomeSchema),
   });
@@ -179,7 +186,10 @@ export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel className="mt-5">Data da despesa</FormLabel>
-                  <Popover>
+                  <Popover
+                    open={isCalendarOpen}
+                    onOpenChange={setIsCalendarOpen}
+                  >
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
@@ -204,7 +214,10 @@ export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
                       <Calendar
                         mode="single"
                         selected={field.value}
-                        onSelect={field.onChange}
+                        onSelect={(e) => {
+                          field.onChange(e);
+                          setIsCalendarOpen(false);
+                        }}
                         disabled={(date) =>
                           date > new Date() || date < new Date("1900-01-01")
                         }

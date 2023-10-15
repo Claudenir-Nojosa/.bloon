@@ -11,7 +11,10 @@ import { Expense, Income } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import dayjs from "dayjs";
-import { FC } from "react";
+import { Pen, Trash } from "lucide-react";
+import { FC, useState } from "react";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 export interface Transactions {
   id: string;
@@ -25,6 +28,8 @@ export interface Transactions {
 }
 
 export const TableOfTransactions = () => {
+  const [showIncomes, setShowIncomes] = useState(false);
+  const [showExpenses, setShowExpenses] = useState(false);
   const { data: dataTransactions, isLoading: isLoadingTransactions } = useQuery(
     {
       queryKey: ["combinedData"],
@@ -36,31 +41,140 @@ export const TableOfTransactions = () => {
   );
   console.log(dataTransactions);
 
-  const incomes = dataTransactions?.filter(
-    (transaction) => transaction.incomeTagId
-  );
-  const expenses = dataTransactions?.filter(
-    (transaction) => transaction.expenseTagId
-  );
-
   const combinedData = dataTransactions?.map((item) => ({
     ...item,
     date: dayjs(item.date).format("DD/MM/YYYY"),
   }));
+  // Filtrar as receitas
+  const incomeData = combinedData?.filter(
+    (transaction) => transaction.incomeTagId
+  );
 
+  // Filtrar as despesas
+  const expenseData = combinedData?.filter(
+    (transaction) => transaction.expenseTagId
+  );
   return (
     <>
+      <div>
+        <h1 className="text-3xl mb-10">
+          Por favor, selecione o tipo de movimentação
+        </h1>
+        <div className="mb-20 gap-6 flex justify-center">
+          <Button
+            variant="outline"
+            onClick={() => {
+              setShowIncomes(false);
+              setShowExpenses(false);
+            }}
+          >
+            Todos
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              setShowIncomes(true);
+              setShowExpenses(false);
+            }}
+          >
+            Receita
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              setShowIncomes(false);
+              setShowExpenses(true);
+            }}
+          >
+            Despesa
+          </Button>
+        </div>
+      </div>
       {isLoadingTransactions ? (
         <p>Carregando...</p>
-      ) : combinedData && combinedData.length > 0 ? (
+      ) : showIncomes && incomeData && incomeData.length > 0 ? (
         <Table>
           <TableCaption>Lista de todas as suas movimentações.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>Tipo</TableHead>
-              <TableHead className="w-[100px]">Descrição</TableHead>
-              <TableHead>Data</TableHead>
-              <TableHead className="text-right">Valor</TableHead>
+              <TableHead className="text-center font-semibold">Tipo</TableHead>
+              <TableHead className="text-center font-semibold">
+                Descrição
+              </TableHead>
+              <TableHead className="text-center font-semibold">Data</TableHead>
+              <TableHead className="text-center font-semibold">Valor</TableHead>
+              <TableHead className="text-center font-semibold">
+                Alterar
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {incomeData.map((transaction) => (
+              <TableRow key={transaction.id}>
+                <TableCell>
+                  {transaction.incomeTagId ? "Receita" : "Despesa"}
+                </TableCell>
+                <TableCell>{transaction.description}</TableCell>
+                <TableCell>{transaction.date}</TableCell>
+                <TableCell>{transaction.value}</TableCell>
+                <TableCell className="flex gap-5 justify-center">
+                  <Pen className="hover:text-[#9633d9] cursor-pointer" />
+                  <Trash className="hover:text-[#9633d9] cursor-pointer" />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      ) : showExpenses && expenseData && expenseData.length > 0 ? (
+        <Table>
+          <TableCaption>Lista de todas as suas movimentações.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-center font-semibold">Tipo</TableHead>
+              <TableHead className="text-center font-semibold">
+                Descrição
+              </TableHead>
+              <TableHead className="text-center font-semibold">Data</TableHead>
+              <TableHead className="text-center font-semibold">Valor</TableHead>
+              <TableHead className="text-center font-semibold">
+                Alterar
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {expenseData.map((transaction) => (
+              <TableRow key={transaction.id}>
+                <TableCell>
+                  {transaction.incomeTagId ? "Receita" : "Despesa"}
+                </TableCell>
+                <TableCell>{transaction.description}</TableCell>
+                <TableCell>{transaction.date}</TableCell>
+                <TableCell>{transaction.value}</TableCell>
+                <TableCell className="flex gap-5 justify-center">
+                  <Pen className="hover:text-[#9633d9] cursor-pointer" />
+                  <Trash className="hover:text-[#9633d9] cursor-pointer" />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      ) : !showExpenses &&
+        !showIncomes &&
+        combinedData &&
+        combinedData.length > 0 ? (
+        <Table>
+          <TableCaption>Lista de todas as suas movimentações.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-center font-semibold">Tipo</TableHead>
+              <TableHead className="text-center font-semibold">
+                Descrição
+              </TableHead>
+              <TableHead className="text-center font-semibold">Data</TableHead>
+              <TableHead className="text-center font-semibold">Valor</TableHead>
+              <TableHead className="text-center font-semibold">
+                Alterar
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -69,12 +183,12 @@ export const TableOfTransactions = () => {
                 <TableCell>
                   {transaction.incomeTagId ? "Receita" : "Despesa"}
                 </TableCell>
-                <TableCell className="font-medium">
-                  {transaction.description}
-                </TableCell>
+                <TableCell>{transaction.description}</TableCell>
                 <TableCell>{transaction.date}</TableCell>
-                <TableCell className="text-right">
-                  {transaction.value}
+                <TableCell>{transaction.value}</TableCell>
+                <TableCell className="flex gap-5 justify-center">
+                  <Pen className="hover:text-[#9633d9] cursor-pointer" />
+                  <Trash className="hover:text-[#9633d9] cursor-pointer" />
                 </TableCell>
               </TableRow>
             ))}
