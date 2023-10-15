@@ -49,7 +49,7 @@ const Budget = () => {
   const difference = incomeTotal - expenseTotal;
   const formattedDifference = numeral(difference).format("0,0.00");
 
-  const colorClass = difference > 0 ? "text-green-700" : "text-red-700";
+  const colorClass = difference > 0 ? "text-green-700" : difference === 0 ? "text-foreground" : "text-red-700";
 
   const data = {
     labels: ["Receita", "Despesa"],
