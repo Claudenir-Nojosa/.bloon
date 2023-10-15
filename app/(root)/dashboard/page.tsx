@@ -2,41 +2,11 @@
 
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
-import { Expense, Income } from "@prisma/client";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Link from "next/link";
 import React, { FC } from "react";
-import dayjs from "dayjs";
+import { TableOfTransactions } from "@/components/dashboard/TableOfTransactions";
 
-export interface Transactions {
-  id: string;
-  description: string;
-  value: number;
-  date: Date;
-  userId: string;
-  updatedAt: string;
-  Income: Income;
-  Expense: Expense;
-}
-
-const Dashboard: FC<Transactions> = () => {
-  const { data: dataTransactions, isLoading: isLoadingTransactions } = useQuery(
-    {
-      queryKey: ["combinedData"],
-      queryFn: async () => {
-        const { data } = await axios.get("/api/transactions");
-        return data.combinedData as Transactions[];
-      },
-    }
-  );
-  console.log(dataTransactions);
-
-  const formattedTransactions = dataTransactions?.map((item) => ({
-    ...item,
-    date: dayjs(item.date).format("DD/MM/YYYY"),
-  }));
-
+const Dashboard = () => {
   return (
     <MaxWidthWrapper className="max-w-xl mb-12 sm:mt-15 flex flex-col items-center justify-center text-center">
       <div>
@@ -52,21 +22,7 @@ const Dashboard: FC<Transactions> = () => {
           </Button>
         </div>
       </div>
-      <ul>
-        {isLoadingTransactions ? (
-          <p>Carregando...</p>
-        ) : formattedTransactions && formattedTransactions.length > 0 ? (
-          <ul>
-            {formattedTransactions.map((item) => (
-              <li key={item.id}>
-                {item.description} - {item.value} - {item.date}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Nenhum dado disponível ainda.</p>
-        )}
-      </ul>
+      <TableOfTransactions />
     </MaxWidthWrapper>
   );
 };
