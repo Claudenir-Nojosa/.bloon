@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Budget from "@/components/Budget";
 
 const page = async () => {
   const session = await auth();
@@ -205,6 +206,7 @@ const page = async () => {
             >
               <Link href="/dashboard">Verificar carteira!</Link>
             </Button>
+            <Budget />
           </div>
         </div>
       )}

@@ -239,6 +239,7 @@ export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
               </div>
             </div>
           </CardBody>
+
         </form>
       </Form>
     </Card>

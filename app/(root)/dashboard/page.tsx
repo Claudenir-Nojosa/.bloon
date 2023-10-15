@@ -8,8 +8,7 @@ import { TableOfTransactions } from "@/components/dashboard/TableOfTransactions"
 
 const Dashboard = () => {
   return (
-    <MaxWidthWrapper className="max-w-xl mb-12 sm:mt-15 flex flex-col items-center justify-center text-center">
-      
+    <MaxWidthWrapper className="max-w-2xl mb-12 sm:mt-15 flex flex-col items-center justify-center text-center">     
       <TableOfTransactions />
     </MaxWidthWrapper>
   );

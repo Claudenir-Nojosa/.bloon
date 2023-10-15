@@ -7,14 +7,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Expense, Income } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import dayjs from "dayjs";
-import { Pen, Trash } from "lucide-react";
-import { FC, useState } from "react";
+import { useState } from "react";
 import { Button } from "../ui/button";
-import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import numeral from "numeral";
 
 export interface Transactions {
   id: string;
@@ -94,7 +100,9 @@ export const TableOfTransactions = () => {
         <p>Carregando...</p>
       ) : showIncomes && incomeData && incomeData.length > 0 ? (
         <Table>
-          <TableCaption>Lista de todas as suas movimentações.</TableCaption>
+          <TableCaption className="md:text-center">
+            Lista de todas as suas movimentações.
+          </TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="text-center font-semibold">Tipo</TableHead>
@@ -103,9 +111,6 @@ export const TableOfTransactions = () => {
               </TableHead>
               <TableHead className="text-center font-semibold">Data</TableHead>
               <TableHead className="text-center font-semibold">Valor</TableHead>
-              <TableHead className="text-center font-semibold">
-                Alterar
-              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -116,10 +121,21 @@ export const TableOfTransactions = () => {
                 </TableCell>
                 <TableCell>{transaction.description}</TableCell>
                 <TableCell>{transaction.date}</TableCell>
-                <TableCell>{transaction.value}</TableCell>
+                <TableCell>
+                  R$ {numeral(transaction.value).format("0,0.00")}
+                </TableCell>
                 <TableCell className="flex gap-5 justify-center">
-                  <Pen className="hover:text-[#9633d9] cursor-pointer" />
-                  <Trash className="hover:text-[#9633d9] cursor-pointer" />
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>...</DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
+                        Editar
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
+                        Excluir
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </TableCell>
               </TableRow>
             ))}
@@ -127,7 +143,9 @@ export const TableOfTransactions = () => {
         </Table>
       ) : showExpenses && expenseData && expenseData.length > 0 ? (
         <Table>
-          <TableCaption>Lista de todas as suas movimentações.</TableCaption>
+          <TableCaption className="md:text-center">
+            Lista de todas as suas movimentações.
+          </TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="text-center font-semibold">Tipo</TableHead>
@@ -136,9 +154,6 @@ export const TableOfTransactions = () => {
               </TableHead>
               <TableHead className="text-center font-semibold">Data</TableHead>
               <TableHead className="text-center font-semibold">Valor</TableHead>
-              <TableHead className="text-center font-semibold">
-                Alterar
-              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -149,10 +164,21 @@ export const TableOfTransactions = () => {
                 </TableCell>
                 <TableCell>{transaction.description}</TableCell>
                 <TableCell>{transaction.date}</TableCell>
-                <TableCell>{transaction.value}</TableCell>
+                <TableCell>
+                  R$ {numeral(transaction.value).format("0,0.00")}
+                </TableCell>
                 <TableCell className="flex gap-5 justify-center">
-                  <Pen className="hover:text-[#9633d9] cursor-pointer" />
-                  <Trash className="hover:text-[#9633d9] cursor-pointer" />
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>...</DropdownMenuTrigger>
+                    <DropdownMenuContent className="bg-red-200">
+                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
+                        Editar
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
+                        Excluir
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </TableCell>
               </TableRow>
             ))}
@@ -163,7 +189,9 @@ export const TableOfTransactions = () => {
         combinedData &&
         combinedData.length > 0 ? (
         <Table>
-          <TableCaption>Lista de todas as suas movimentações.</TableCaption>
+          <TableCaption className="md:text-center">
+            Lista de todas as suas movimentações.
+          </TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="text-center font-semibold">Tipo</TableHead>
@@ -172,9 +200,6 @@ export const TableOfTransactions = () => {
               </TableHead>
               <TableHead className="text-center font-semibold">Data</TableHead>
               <TableHead className="text-center font-semibold">Valor</TableHead>
-              <TableHead className="text-center font-semibold">
-                Alterar
-              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -185,10 +210,21 @@ export const TableOfTransactions = () => {
                 </TableCell>
                 <TableCell>{transaction.description}</TableCell>
                 <TableCell>{transaction.date}</TableCell>
-                <TableCell>{transaction.value}</TableCell>
+                <TableCell>
+                  R$ {numeral(transaction.value).format("0,0.00")}
+                </TableCell>
                 <TableCell className="flex gap-5 justify-center">
-                  <Pen className="hover:text-[#9633d9] cursor-pointer" />
-                  <Trash className="hover:text-[#9633d9] cursor-pointer" />
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>...</DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
+                        Editar
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer hover:text-[#9633d9]">
+                        Excluir
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </TableCell>
               </TableRow>
             ))}
