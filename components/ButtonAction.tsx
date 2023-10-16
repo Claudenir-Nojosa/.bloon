@@ -61,11 +61,11 @@ const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
         className="cursor-pointer hover:text-[#9633d9]"
       >
         {isIncome ? (
-          <Link href={`/incomes/${id}`}>
+          <Link href={`/incomes/edit/${id}`}>
             <Edit />
           </Link>
         ) : (
-          <Link href={`/expenses/${id}`}>
+          <Link href={`/expenses/edit/${id}`}>
             <Edit />
           </Link>
         )}
