@@ -13,7 +13,7 @@ interface EditExpensePageProps {
   };
 }
 
-const page: FC<EditExpensePageProps> = ({ params }) => {
+const EditExpensePage: FC<EditExpensePageProps> = ({ params }) => {
   const { id } = params;
   const { data: dataExpense, isLoading: isLoadingExpense } = useQuery({
     queryKey: ["expenses", id],
@@ -40,4 +40,4 @@ const page: FC<EditExpensePageProps> = ({ params }) => {
   );
 };
 
-export default page;
+export default EditExpensePage;

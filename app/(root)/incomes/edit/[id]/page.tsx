@@ -7,13 +7,13 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { FC } from "react";
 
-interface EditExpensePageProps {
+interface EditIncomePageProps {
   params: {
     id: string;
   };
 }
 
-const page: FC<EditExpensePageProps> = ({ params }) => {
+const EditIncomePage: FC<EditIncomePageProps> = ({ params }) => {
   const { id } = params;
   const { data: dataIncome, isLoading: isLoadingIncome } = useQuery({
     queryKey: ["incomes", id],
@@ -37,4 +37,4 @@ const page: FC<EditExpensePageProps> = ({ params }) => {
   );
 };
 
-export default page;
+export default EditIncomePage;
