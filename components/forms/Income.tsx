@@ -37,6 +37,7 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
+import Loading from "../Loading";
 
 interface FormIncomeProps {
   initialValue?: FormInputIncome;
@@ -70,7 +71,7 @@ export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
       return response.data;
     },
   });
-  const { mutate: createIncome, isLoading } = useMutation<
+  const { mutate: createIncome, isLoading: isLoadingCreation } = useMutation<
     Income,
     unknown,
     z.infer<typeof IncomeSchema>
@@ -233,12 +234,11 @@ export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
                   <Link href="/">Cancelar</Link>
                 </Button>
                 <Button variant="outline" type="submit">
-                  Criar
+                  {isLoadingCreation ? <Loading /> : "Criar"}
                 </Button>
               </div>
             </div>
           </CardBody>
-
         </form>
       </Form>
     </Card>

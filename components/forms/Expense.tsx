@@ -38,6 +38,7 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import Loading from "../Loading";
 
 interface FormExpenseProps {
   initialValue?: FormInputExpense;
@@ -75,7 +76,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
   });
 
 
-  const { mutate: createExpense, isLoading } = useMutation<
+  const { mutate: createExpense, isLoading: isLoadingCreation } = useMutation<
     Expense,
     unknown,
     z.infer<typeof ExpenseSchema>
@@ -237,7 +238,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
                   <Link href="/">Cancelar</Link>
                 </Button>
                 <Button variant="outline" type="submit">
-                  Criar
+                  {isLoadingCreation ? <Loading /> : "Criar"}
                 </Button>
               </div>
             </div>
