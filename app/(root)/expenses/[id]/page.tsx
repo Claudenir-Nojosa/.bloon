@@ -39,8 +39,8 @@ const ExpenseDetail: FC<TransactionDetailPageProps> = async ({ params }) => {
   const transaction = await getExpense(params.id);
 
   return (
-    <MaxWidthWrapper>
-      <Card className="min-w-full">
+    <MaxWidthWrapper className="flex flex-col justify-center items-center mt-20">
+      <Card className="max-w-2xl">
         <CardHeader>
           <CardTitle className="flex">
             <h2 className={title({ color: "violet", size: "sm" })}>
