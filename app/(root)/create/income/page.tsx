@@ -12,7 +12,7 @@ const IncomeCreation: FC<CreateIncomePageProps> = ({ params }) => {
   return (
     <div className="h-5/6 flex items-center">
       <MaxWidthWrapper className="max-w-2xl">
-        <IncomeForm params={params} />
+        <IncomeForm params={params} isEditing={false} />
       </MaxWidthWrapper>
     </div>
   );
