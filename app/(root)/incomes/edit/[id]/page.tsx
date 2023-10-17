@@ -25,13 +25,20 @@ const EditIncomePage: FC<EditIncomePageProps> = ({ params }) => {
   console.log(dataIncome);
 
   if (isLoadingIncome) {
-    return <Loading />;
+    return (
+      <MaxWidthWrapper className="flex flex-col justify-center items-center text-center min-h-full">
+        <Loading />
+      </MaxWidthWrapper>
+    );
   }
 
   return (
     <div className="h-5/6 flex items-center">
       <MaxWidthWrapper className="max-w-2xl">
-        <IncomeForm params={params} initialValue={dataIncome} />
+        <IncomeForm
+          params={params}
+          initialValue={{ ...dataIncome, date: new Date(dataIncome.date) }}
+        />
       </MaxWidthWrapper>
     </div>
   );

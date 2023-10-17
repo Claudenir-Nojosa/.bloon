@@ -34,7 +34,10 @@ const EditExpensePage: FC<EditExpensePageProps> = ({ params }) => {
   return (
     <div className="h-5/6 flex items-center">
       <MaxWidthWrapper className="max-w-2xl">
-        <ExpenseForm params={params} initialValue={dataExpense} />
+        <ExpenseForm
+          params={params}
+          initialValue={{ ...dataExpense, date: new Date(dataExpense.date) }}
+        />
       </MaxWidthWrapper>
     </div>
   );

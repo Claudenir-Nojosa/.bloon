@@ -75,7 +75,6 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
     },
   });
 
-
   const { mutate: createExpense, isLoading: isLoadingCreation } = useMutation<
     Expense,
     unknown,
@@ -204,7 +203,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
                               !field.value && "text-muted-foreground"
                             )}
                           >
-                            {field.value ? (
+                            {field.value && field.value instanceof Date ? (
                               format(field.value, "PPP", { locale: ptBR })
                             ) : (
                               <span className="text-zinc-400">

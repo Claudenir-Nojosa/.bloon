@@ -200,7 +200,7 @@ export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
                               !field.value && "text-muted-foreground"
                             )}
                           >
-                            {field.value ? (
+                            {field.value && field.value instanceof Date ? (
                               format(field.value, "PPP", { locale: ptBR })
                             ) : (
                               <span className="text-zinc-400">
