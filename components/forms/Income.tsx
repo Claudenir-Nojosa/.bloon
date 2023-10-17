@@ -40,13 +40,18 @@ import { Calendar } from "../ui/calendar";
 import Loading from "../Loading";
 
 interface FormIncomeProps {
+  isEditing: boolean;
   initialValue?: FormInputIncome;
   params: {
     id: string;
   };
 }
 
-export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
+export const IncomeForm: FC<FormIncomeProps> = ({
+  initialValue,
+  params,
+  isEditing,
+}) => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const form = useForm<z.infer<typeof IncomeSchema>>({
     resolver: zodResolver(IncomeSchema),
@@ -89,9 +94,31 @@ export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
       toast.error("Aconteceu um erro ao criar a Receita, tente novamente");
     },
   });
+  const { mutate: editIncome, isLoading: isLoadingEdit } = useMutation<
+    Income,
+    unknown,
+    z.infer<typeof IncomeSchema>
+  >({
+    mutationFn: async (newIncomeEditData) => {
+      const response = await axios.patch(
+        `/api/incomes/${id}`,
+        newIncomeEditData
+      );
+      return response.data;
+    },
+    onSuccess: (data) => {
+      toast.success("Receita editada com sucesso!");
+      router.push("/dashboard");
+      router.refresh();
+    },
+    onError: (data) => {
+      toast.error("Aconteceu um erro ao editar a Receita, tente novamente");
+    },
+  });
   function onSubmit(data: z.infer<typeof IncomeSchema>) {
-    createIncome(data);
-    console.log(data);
+    {
+      isEditing ? editIncome(data) : createIncome(data);
+    }
   }
   const defaultValue =
     initialValue && dataIncomeTags
@@ -234,7 +261,15 @@ export const IncomeForm: FC<FormIncomeProps> = ({ initialValue, params }) => {
                   <Link href="/">Cancelar</Link>
                 </Button>
                 <Button variant="outline" type="submit">
-                  {isLoadingCreation ? <Loading /> : "Criar"}
+                  {isLoadingCreation ? (
+                    <Loading />
+                  ) : isEditing && isLoadingEdit ? (
+                    <Loading />
+                  ) : isEditing ? (
+                    "Atualizar"
+                  ) : (
+                    "Criar"
+                  )}
                 </Button>
               </div>
             </div>

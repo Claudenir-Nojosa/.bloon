@@ -25,7 +25,30 @@ export async function DELETE(req: Request, context: contextProps) {
     );
   }
 }
-
+export async function PATCH(req: Request, context: contextProps) {
+  try {
+    const { params } = context;
+    const body = await req.json();
+    await db.income.update({
+      where: {
+        id: params.id,
+      },
+      data: {
+        description: body.description,
+        value: body.value,
+        incomeTagId: body.incomeTagId,
+        date: body.date,
+      },
+    });
+    return NextResponse.json({ message: "Update Success" }, { status: 200 });
+  } catch (error) {
+    console.log("erro:", error);
+    return NextResponse.json(
+      { message: "Could Not Update Income" },
+      { status: 500 }
+    );
+  }
+}
 export async function GET(req: Request, context: contextProps) {
   const session = await auth();
   if (!session) return new Response("No session found", { status: 401 });

@@ -12,7 +12,7 @@ const ExpenseCreation: FC<CreateExpensePageProps> = ({ params }) => {
   return (
     <div className="h-5/6 flex items-center">
       <MaxWidthWrapper className="max-w-2xl">
-        <ExpenseForm params={params} />
+        <ExpenseForm params={params} isEditing={false} />
       </MaxWidthWrapper>
     </div>
   );

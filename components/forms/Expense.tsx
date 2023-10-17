@@ -41,13 +41,18 @@ import { ptBR } from "date-fns/locale";
 import Loading from "../Loading";
 
 interface FormExpenseProps {
+  isEditing: boolean;
   initialValue?: FormInputExpense;
   params: {
     id: string;
   };
 }
 
-export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
+export const ExpenseForm: FC<FormExpenseProps> = ({
+  initialValue,
+  params,
+  isEditing,
+}) => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const form = useForm<z.infer<typeof ExpenseSchema>>({
@@ -93,8 +98,32 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
       toast.error("Aconteceu um erro ao criar a Receita, tente novamente");
     },
   });
+
+  const { mutate: editExpense, isLoading: isLoadingEdit } = useMutation<
+    Expense,
+    unknown,
+    z.infer<typeof ExpenseSchema>
+  >({
+    mutationFn: async (newExpenseEditData) => {
+      const response = await axios.patch(
+        `/api/expenses/${id}`,
+        newExpenseEditData
+      );
+      return response.data;
+    },
+    onSuccess: (data) => {
+      toast.success("Despesa editada com sucesso!");
+      router.push("/dashboard");
+      router.refresh();
+    },
+    onError: (data) => {
+      toast.error("Aconteceu um erro ao editar a Despesa, tente novamente");
+    },
+  });
   function onSubmit(data: z.infer<typeof ExpenseSchema>) {
-    createExpense(data);
+    {
+      isEditing ? editExpense(data) : createExpense(data);
+    }
   }
   const defaultValue =
     initialValue && dataExpenseTags
@@ -237,7 +266,15 @@ export const ExpenseForm: FC<FormExpenseProps> = ({ initialValue, params }) => {
                   <Link href="/">Cancelar</Link>
                 </Button>
                 <Button variant="outline" type="submit">
-                  {isLoadingCreation ? <Loading /> : "Criar"}
+                  {isLoadingCreation ? (
+                    <Loading />
+                  ) : isEditing && isLoadingEdit ? (
+                    <Loading />
+                  ) : isEditing ? (
+                    "Atualizar"
+                  ) : (
+                    "Criar"
+                  )}
                 </Button>
               </div>
             </div>

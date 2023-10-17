@@ -36,6 +36,7 @@ const EditIncomePage: FC<EditIncomePageProps> = ({ params }) => {
     <div className="h-5/6 flex items-center">
       <MaxWidthWrapper className="max-w-2xl">
         <IncomeForm
+          isEditing={true}
           params={params}
           initialValue={{ ...dataIncome, date: new Date(dataIncome.date) }}
         />
