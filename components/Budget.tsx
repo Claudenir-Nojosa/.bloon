@@ -5,6 +5,7 @@ import axios from "axios";
 import numeral from "numeral";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import Loading from "./Loading";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -31,7 +32,11 @@ const Budget = () => {
   console.log(dataTransactions);
 
   if (isLoadingTransactions) {
-    return <div>Carregando...</div>;
+    return (
+      <div className="mt-4">
+        <Loading />
+      </div>
+    );
   }
 
   if (!dataTransactions) {
@@ -49,7 +54,12 @@ const Budget = () => {
   const difference = incomeTotal - expenseTotal;
   const formattedDifference = numeral(difference).format("0,0.00");
 
-  const colorClass = difference > 0 ? "text-green-700" : difference === 0 ? "text-foreground" : "text-red-700";
+  const colorClass =
+    difference > 0
+      ? "text-green-700"
+      : difference === 0
+      ? "text-foreground"
+      : "text-red-700";
 
   const data = {
     labels: ["Receita", "Despesa"],
@@ -65,22 +75,17 @@ const Budget = () => {
   };
   const options = {};
   return (
-    <div className="font-semibold text-lg">
-      <p>
-        Saldo Atual:{" "}
-        <span className={colorClass}>R$ {formattedDifference}</span>
+    <div className="font-semibold text-lg  gap-3 flex flex-col">
+      <p className={`text-2xl ${colorClass}`}>
+        Saldo Atual: <span>R$ {formattedDifference}</span>
       </p>
       <p>
         Total de Receitas:{" "}
-        <span className="dark:text-green-200 text-green-500 font-normal">
-          R$ {numeral(incomeTotal).format("0,0.00")}
-        </span>
+        <span>R$ {numeral(incomeTotal).format("0,0.00")}</span>
       </p>
       <p>
         Total de Despesas:{" "}
-        <span className="dark:text-red-200 text-red-700 ">
-          R$ {numeral(expenseTotal).format("0,0.00")}
-        </span>
+        <span>R$ {numeral(expenseTotal).format("0,0.00")}</span>
       </p>
       <div className="mt-4 mb-20">
         <Doughnut data={data} options={options} />

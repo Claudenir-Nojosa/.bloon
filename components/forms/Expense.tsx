@@ -217,7 +217,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                 control={form.control}
                 name="date"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem className="flex flex-col w-full">
                     <FormLabel className="mt-5">Data da despesa</FormLabel>
                     <Popover
                       open={isCalendarOpen}
@@ -228,7 +228,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                           <Button
                             variant={"outline"}
                             className={cn(
-                              "w-[240px] pl-3 text-left font-normal",
+                              "w-full pl-3 text-left font-normal",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -261,22 +261,22 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                   </FormItem>
                 )}
               />
-              <div className="justify-end flex w-full gap-4">
-                <Button variant="outline">
-                  <Link href="/">Cancelar</Link>
-                </Button>
-                <Button variant="outline" type="submit">
-                  {isLoadingCreation ? (
-                    <Loading />
-                  ) : isEditing && isLoadingEdit ? (
-                    <Loading />
-                  ) : isEditing ? (
-                    "Atualizar"
-                  ) : (
-                    "Criar"
-                  )}
-                </Button>
-              </div>
+            </div>
+            <div className="mt-10 gap-3 justify-end flex">
+              <Button variant="outline">
+                <Link href="/">Cancelar</Link>
+              </Button>
+              <Button variant="outline" type="submit">
+                {isLoadingCreation ? (
+                  <Loading />
+                ) : isEditing && isLoadingEdit ? (
+                  <Loading />
+                ) : isEditing ? (
+                  "Atualizar"
+                ) : (
+                  "Criar"
+                )}
+              </Button>
             </div>
           </CardBody>
         </form>

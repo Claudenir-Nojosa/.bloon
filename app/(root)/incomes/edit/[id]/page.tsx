@@ -33,7 +33,7 @@ const EditIncomePage: FC<EditIncomePageProps> = ({ params }) => {
   }
 
   return (
-    <div className="h-5/6 flex items-center">
+    <div className="h-5/6 flex items-center mb-24">
       <MaxWidthWrapper className="max-w-2xl">
         <IncomeForm
           isEditing={true}

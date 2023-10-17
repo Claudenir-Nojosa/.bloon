@@ -10,7 +10,7 @@ interface CreateIncomePageProps {
 
 const IncomeCreation: FC<CreateIncomePageProps> = ({ params }) => {
   return (
-    <div className="h-5/6 flex items-center">
+    <div className="sm:h-5/6 flex items-center mb-24">
       <MaxWidthWrapper className="max-w-2xl">
         <IncomeForm params={params} isEditing={false} />
       </MaxWidthWrapper>

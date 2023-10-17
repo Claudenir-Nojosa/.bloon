@@ -129,7 +129,7 @@ export const IncomeForm: FC<FormIncomeProps> = ({
     <Card className="border rounded-2xl p-2 pb-2 mt-6 min-w-[20rem]">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <CardHeader className="flex flex-col text-lg  dark:text-zinc-300 justify-center items-center text-center">
+          <CardHeader className="flex flex-col text-lg dark:text-zinc-300 justify-center items-center text-center">
             <Image
               src="/assets/income.svg"
               alt="Income Image"
@@ -193,7 +193,6 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                       <SelectTrigger className="w-full text-zinc-400">
                         <SelectValue placeholder={`${defaultValue}`} />
                       </SelectTrigger>
-
                       <SelectContent className="bg-black text-zinc-300">
                         {dataIncomeTags?.map((item) => (
                           <SelectItem key={item.id} value={item.id}>
@@ -212,8 +211,8 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                 control={form.control}
                 name="date"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel className="mt-5">Data da despesa</FormLabel>
+                  <FormItem className="flex flex-col w-full">
+                    <FormLabel className="mt-5">Data da receita</FormLabel>
                     <Popover
                       open={isCalendarOpen}
                       onOpenChange={setIsCalendarOpen}
@@ -223,7 +222,7 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                           <Button
                             variant={"outline"}
                             className={cn(
-                              "w-[240px] pl-3 text-left font-normal",
+                              "w-full pl-3 text-left font-normal",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -256,22 +255,22 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                   </FormItem>
                 )}
               />
-              <div className="justify-end flex w-full gap-4">
-                <Button variant="outline">
-                  <Link href="/">Cancelar</Link>
-                </Button>
-                <Button variant="outline" type="submit">
-                  {isLoadingCreation ? (
-                    <Loading />
-                  ) : isEditing && isLoadingEdit ? (
-                    <Loading />
-                  ) : isEditing ? (
-                    "Atualizar"
-                  ) : (
-                    "Criar"
-                  )}
-                </Button>
-              </div>
+            </div>
+            <div className="mt-10 gap-3 justify-end flex">
+              <Button variant="outline">
+                <Link href="/">Cancelar</Link>
+              </Button>
+              <Button variant="outline" type="submit">
+                {isLoadingCreation ? (
+                  <Loading />
+                ) : isEditing && isLoadingEdit ? (
+                  <Loading />
+                ) : isEditing ? (
+                  "Atualizar"
+                ) : (
+                  "Criar"
+                )}
+              </Button>
             </div>
           </CardBody>
         </form>
