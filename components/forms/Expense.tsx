@@ -247,9 +247,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                         <Calendar
                           mode="single"
                           selected={field.value}
-                          disabled={(date) =>
-                            date > new Date() || date < new Date("1900-01-01")
-                          }
+                          disabled={(date) => date < new Date("1900-01-01")}
                           initialFocus
                           onSelect={(e) => {
                             field.onChange(e);

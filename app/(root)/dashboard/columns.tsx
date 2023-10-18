@@ -11,6 +11,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
+import { Checkbox } from "@/components/ui/checkbox";
+import ButtonAction from "@/components/ButtonAction";
+
 // This type is used to define the shape of our data.
 export interface Transactions {
   id: string;
@@ -45,9 +49,7 @@ export const columns: ColumnDef<Transactions>[] = [
         <Button
           variant="ghost"
           onClick={() => {
-            console.log("Classificação antes:", column.getIsSorted());
             column.toggleSorting(column.getIsSorted() === "asc");
-            console.log("Classificação depois:", column.getIsSorted());
           }}
         >
           Descrição
@@ -107,7 +109,16 @@ export const columns: ColumnDef<Transactions>[] = [
               Copiar descrição
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Ver detalhes</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/incomes/${transactions.id}`}>Ver detalhes</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              {transactions.incomeTagId ? (
+                <ButtonAction id={transactions.id} isIncome={true} />
+              ) : (
+                <ButtonAction id={transactions.id} isIncome={false} />
+              )}
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
