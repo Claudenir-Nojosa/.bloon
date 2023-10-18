@@ -250,6 +250,7 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                         />
                       </PopoverContent>
                     </Popover>
+                    <FormMessage />
                   </FormItem>
                 )}
               />

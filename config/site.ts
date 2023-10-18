@@ -42,6 +42,10 @@ export const siteNavConfigWithSession = {
       href: "/create/expense",
     },
     {
+      label: "Categorias",
+      href: "/create/categories",
+    },
+    {
       label: "Metas",
       href: "/goals",
     },

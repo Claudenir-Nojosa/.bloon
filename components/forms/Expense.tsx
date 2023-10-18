@@ -256,6 +256,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                         />
                       </PopoverContent>
                     </Popover>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
