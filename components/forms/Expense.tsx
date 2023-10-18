@@ -34,7 +34,7 @@ import {
 } from "../../components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { cn } from "@/lib/utils";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Trash } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -125,6 +125,12 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
       isEditing ? editExpense(data) : createExpense(data);
     }
   }
+  // Mapeamento entre nomes de tags e URLs de imagens
+  const tagImageMapping: Record<string, string> = {
+    Alimentação: "/assets/comida.png",
+    Outros: "/assets/expense.svg",
+  };
+
   const defaultValue =
     initialValue && dataExpenseTags
       ? dataExpenseTags.find((tag) => tag.id === initialValue.expenseTagId)
@@ -183,7 +189,9 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
               name="expenseTagId"
               render={({ field }) => (
                 <FormItem className="mt-4">
-                  <FormLabel>Categoria</FormLabel>
+                  <div className="flex justify-start items-center gap-5">
+                    <FormLabel>Categoria</FormLabel>
+                  </div>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -195,14 +203,28 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                           : ""
                       }
                     >
-                      <SelectTrigger className="w-full text-zinc-400">
+                      <SelectTrigger className="w-full text-zinc-400 flex">
                         <SelectValue placeholder={`${defaultValue}`} />
                       </SelectTrigger>
 
-                      <SelectContent className="bg-black text-zinc-300">
+                      <SelectContent className="bg-black text-zinc-300 flex flex-row justify-center items-center">
                         {dataExpenseTags?.map((item) => (
-                          <SelectItem key={item.id} value={item.id}>
-                            {item.name}
+                          <SelectItem
+                            className=""
+                            key={item.id}
+                            value={item.id}
+                          >
+                            <div className="flex justify-between items-center gap-3">
+                              {tagImageMapping[item.name] && (
+                                <Image
+                                  alt={item.name}
+                                  src={tagImageMapping[item.name]}
+                                  height={24}
+                                  width={24}
+                                />
+                              )}
+                              {item.name}
+                            </div>
                           </SelectItem>
                         ))}
                       </SelectContent>

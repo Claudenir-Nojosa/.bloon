@@ -32,6 +32,8 @@ import {
 import { Transactions } from "@/app/(root)/dashboard/columns";
 import { DataTablePagination } from "./data-table-pagination";
 import React, { useState } from "react";
+import { format, parse } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -62,6 +64,18 @@ export function DataTable<TData, TValue>({
     onColumnVisibilityChange: setColumnVisibility,
   });
 
+  const formatDate = (date: Date | string) => {
+    if (date) {
+      if (typeof date === "string") {
+        // Analisar a data no formato "dd/MM/yyyy"
+        date = parse(date, "dd/MM/yyyy", new Date(), { locale: ptBR });
+      }
+
+      return format(date, "dd/MM/yyyy", { locale: ptBR });
+    } else {
+      return "Data inválida";
+    }
+  };
   return (
     <div>
       {/* Tabela */}
@@ -147,9 +161,7 @@ export function DataTable<TData, TValue>({
                           : cell.column.id === "descrição"
                           ? (data[row.index] as Transactions).description
                           : cell.column.id === "data"
-                          ? new Date(
-                              (data[row.index] as Transactions).date
-                            ).toLocaleDateString()
+                          ? formatDate((data[row.index] as Transactions).date)
                           : cell.column.id === "valor"
                           ? (
                               data[row.index] as Transactions
