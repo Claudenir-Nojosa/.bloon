@@ -1,4 +1,4 @@
-import {
+/* import {
   Table,
   TableBody,
   TableCaption,
@@ -108,28 +108,22 @@ export const TableOfTransactions = () => {
           </TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-center font-semibold hidden sm:flex">
-                Tipo
-              </TableHead>
+              <TableHead className="text-center font-semibold">Tipo</TableHead>
               <TableHead className="text-center font-semibold">
                 Descrição
               </TableHead>
-              <TableHead className="text-center font-semibold hidden sm:flex">
-                Data
-              </TableHead>
+              <TableHead className="text-center font-semibold">Data</TableHead>
               <TableHead className="text-center font-semibold">Valor</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {incomeData.map((transaction) => (
               <TableRow key={transaction.id}>
-                <TableCell className="hidden sm:flex">
+                <TableCell>
                   {transaction.incomeTagId ? "Receita" : "Despesa"}
                 </TableCell>
                 <TableCell>{transaction.description}</TableCell>
-                <TableCell className="hidden sm:flex">
-                  {transaction.date}
-                </TableCell>
+                <TableCell>{transaction.date}</TableCell>
                 <TableCell>
                   R$ {numeral(transaction.value).format("0,0.00")}
                 </TableCell>
@@ -152,28 +146,22 @@ export const TableOfTransactions = () => {
           </TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-center font-semibold hidden sm:flex">
-                Tipo
-              </TableHead>
+              <TableHead className="text-center font-semibold">Tipo</TableHead>
               <TableHead className="text-center font-semibold">
                 Descrição
               </TableHead>
-              <TableHead className="text-center font-semibold  hidden sm:flex">
-                Data
-              </TableHead>
+              <TableHead className="text-center font-semibold ">Data</TableHead>
               <TableHead className="text-center font-semibold">Valor</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {expenseData.map((transaction) => (
               <TableRow key={transaction.id}>
-                <TableCell className="hidden sm:flex">
+                <TableCell>
                   {transaction.incomeTagId ? "Receita" : "Despesa"}
                 </TableCell>
                 <TableCell>{transaction.description}</TableCell>
-                <TableCell className="hidden sm:flex">
-                  {transaction.date}
-                </TableCell>
+                <TableCell>{transaction.date}</TableCell>
                 <TableCell>
                   R$ {numeral(transaction.value).format("0,0.00")}
                 </TableCell>
@@ -199,26 +187,22 @@ export const TableOfTransactions = () => {
           </TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-center font-semibold hidden sm:flex">
-                Tipo
-              </TableHead>
+              <TableHead className="text-center font-semibold">Tipo</TableHead>
               <TableHead className="text-center font-semibold">
                 Descrição
               </TableHead>
-              <TableHead className="text-center font-semibold hidden sm:flex">
-                Data
-              </TableHead>
+              <TableHead className="text-center font-semibold">Data</TableHead>
               <TableHead className="text-center font-semibold">Valor</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {combinedData.map((transaction) => (
               <TableRow key={transaction.id}>
-                <TableCell className="hidden sm:flex">
+                <TableCell>
                   {transaction.incomeTagId ? "Receita" : "Despesa"}
                 </TableCell>
                 <TableCell>{transaction.description}</TableCell>
-                <TableCell className="hidden sm:flex">{transaction.date}</TableCell>
+                <TableCell>{transaction.date}</TableCell>
                 <TableCell>
                   R$ {numeral(transaction.value).format("0,0.00")}
                 </TableCell>
@@ -249,3 +233,4 @@ export const TableOfTransactions = () => {
     </>
   );
 };
+ */
