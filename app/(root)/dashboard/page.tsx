@@ -26,6 +26,8 @@ const Dashboard = () => {
     date: dayjs(item.date).format("DD/MM/YYYY"),
   }));
   console.log(combinedData);
+  
+  //Falta proteger a rota
   return (
     <MaxWidthWrapper className="max-w-2xl mt-20 sm:mb-12 mb-40 sm:mt-15 flex flex-col items-center justify-center text-center">
       <h1 className="text-5xl mb-5 font-bold">Todas as transações</h1>
