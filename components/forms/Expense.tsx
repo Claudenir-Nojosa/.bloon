@@ -128,7 +128,20 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
   // Mapeamento entre nomes de tags e URLs de imagens
   const tagImageMapping: Record<string, string> = {
     Alimentação: "/assets/comida.png",
-    Outros: "/assets/expense.svg",
+    Outros: "/assets/outros.png",
+    "Assinaturas e serviços": "/assets/assinaturas.png",
+    "Bares e restaurantes": "/assets/restaurante.png",
+    "Cuidados pessoais": "/assets/cuidados.png",
+    Casa: "/assets/casa.png",
+    Educação: "/assets/educação.png",
+    "Família e filhos": "/assets/familia.png",
+    Investimentos: "/assets/investimentos.png",
+    Pets: "/assets/pet.png",
+    "Lazer e hobbies": "/assets/hobbies.png",
+    Roupas: "/assets/roupa.png",
+    Saúde: "/assets/saúde.png",
+    Transporte: "/assets/transporte.png",
+    Viagem: "/assets/viagem.png",
   };
 
   const defaultValue =
