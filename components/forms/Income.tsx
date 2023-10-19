@@ -125,13 +125,6 @@ export const IncomeForm: FC<FormIncomeProps> = ({
       ? dataIncomeTags.find((tag) => tag.id === initialValue.incomeTagId)
           ?.name || ""
       : "Selecione";
-  // Mapeamento entre nomes de tags e URLs de imagens
-  const tagImageMapping: Record<string, string> = {
-    Salário: "/assets/salário.png",
-    Empréstimos: "/assets/empréstimo.png",
-    Investimentos: "/assets/investimentos.png",
-    "Outras receitas": "/assets/outros.png",
-  };
   return (
     <Card className="border rounded-2xl p-2 pb-2 mt-6 min-w-[20rem]">
       <Form {...form}>
@@ -208,14 +201,13 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                             value={item.id}
                           >
                             <div className="flex justify-between items-center gap-3">
-                              {tagImageMapping[item.name] && (
-                                <Image
-                                  alt={item.name}
-                                  src={tagImageMapping[item.name]}
-                                  height={24}
-                                  width={24}
-                                />
-                              )}
+                              <Image
+                                alt={item.name}
+                                src={item.icon}
+                                height={24}
+                                width={24}
+                              />
+
                               {item.name}
                             </div>
                           </SelectItem>

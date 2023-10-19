@@ -125,24 +125,6 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
       isEditing ? editExpense(data) : createExpense(data);
     }
   }
-  // Mapeamento entre nomes de tags e URLs de imagens
-  const tagImageMapping: Record<string, string> = {
-    Alimentação: "/assets/comida.png",
-    Outros: "/assets/outros.png",
-    "Assinaturas e serviços": "/assets/assinaturas.png",
-    "Bares e restaurantes": "/assets/restaurante.png",
-    "Cuidados pessoais": "/assets/cuidados.png",
-    Casa: "/assets/casa.png",
-    Educação: "/assets/educação.png",
-    "Família e filhos": "/assets/familia.png",
-    Investimentos: "/assets/investimentos.png",
-    Pets: "/assets/pet.png",
-    "Lazer e hobbies": "/assets/hobbies.png",
-    Roupas: "/assets/roupa.png",
-    Saúde: "/assets/saúde.png",
-    Transporte: "/assets/transporte.png",
-    Viagem: "/assets/viagem.png",
-  };
 
   const defaultValue =
     initialValue && dataExpenseTags
@@ -228,14 +210,13 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                             value={item.id}
                           >
                             <div className="flex justify-between items-center gap-3">
-                              {tagImageMapping[item.name] && (
-                                <Image
-                                  alt={item.name}
-                                  src={tagImageMapping[item.name]}
-                                  height={24}
-                                  width={24}
-                                />
-                              )}
+                              <Image
+                                alt={item.name}
+                                src={item.icon}
+                                height={24}
+                                width={24}
+                              />
+
                               {item.name}
                             </div>
                           </SelectItem>
