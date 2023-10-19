@@ -30,17 +30,7 @@ export interface Transactions {
 export const columns: ColumnDef<Transactions>[] = [
   {
     accessorKey: "tipo",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Tipo
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "Tipo",
   },
   {
     accessorKey: "description",
@@ -48,6 +38,7 @@ export const columns: ColumnDef<Transactions>[] = [
       return (
         <Button
           variant="ghost"
+          className="text-md"
           onClick={() => {
             column.toggleSorting(column.getIsSorted() === "asc");
           }}
@@ -59,32 +50,16 @@ export const columns: ColumnDef<Transactions>[] = [
     },
   },
   {
+    accessorKey: "category",
+    header: "Categoria",
+  },
+  {
     accessorKey: "data",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Data
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "Data",
   },
   {
     accessorKey: "valor",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Valor
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "Valor",
   },
   {
     id: "ações",

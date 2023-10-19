@@ -160,6 +160,10 @@ export function DataTable<TData, TValue>({
                             : ""
                           : cell.column.id === "descrição"
                           ? (data[row.index] as Transactions).description
+                          : cell.column.id === "category"
+                          ? (data[row.index] as Transactions).incomeTagId
+                            ? (data[row.index] as Transactions).incomeTagId
+                            : (data[row.index] as Transactions).expenseTagId
                           : cell.column.id === "data"
                           ? formatDate((data[row.index] as Transactions).date)
                           : cell.column.id === "valor"
