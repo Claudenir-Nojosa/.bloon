@@ -105,36 +105,45 @@ export function DataTable<TData, TValue>({
 
   // Função para mapear os ícones com base no incomeTagId
   const mapIncomeTagIcon = (incomeTagId: any, dataIncomeTags: any) => {
-    const incomeTag = dataIncomeTags.find((tag: any) => tag.id === incomeTagId);
-    return incomeTag ? (
-      <div className="flex gap-2 justify-start items-center text-start">
-        <Image
-          src={incomeTag.icon}
-          alt={incomeTag.name}
-          width={24}
-          height={24}
-        />
-        <span>{incomeTag.name}</span>
-      </div>
-    ) : null;
+    if (dataIncomeTags) {
+      const incomeTag = dataIncomeTags.find(
+        (tag: any) => tag.id === incomeTagId
+      );
+      return incomeTag ? (
+        <div className="flex gap-2 justify-start items-center text-start">
+          <Image
+            src={incomeTag.icon}
+            alt={incomeTag.name}
+            width={24}
+            height={24}
+          />
+          <span>{incomeTag.name}</span>
+        </div>
+      ) : null;
+    }
+    return null;
   };
   // Função para mapear os ícones com base no incomeTagId
   const mapExpenseTagIcon = (expenseTagId: any, dataExpenseTags: any) => {
-    const expenseTag = dataExpenseTags.find(
-      (tag: any) => tag.id === expenseTagId
-    );
-    return expenseTag ? (
-      <div className="flex gap-2 justify-start items-center text-start">
-        <Image
-          src={expenseTag.icon}
-          alt={expenseTag.name}
-          width={24}
-          height={24}
-        />
-        <span>{expenseTag.name}</span>
-      </div>
-    ) : null;
+    if (dataExpenseTags) {
+      const expenseTag = dataExpenseTags.find(
+        (tag: any) => tag.id === expenseTagId
+      );
+      return expenseTag ? (
+        <div className="flex gap-2 justify-start items-center text-start">
+          <Image
+            src={expenseTag.icon}
+            alt={expenseTag.name}
+            width={24}
+            height={24}
+          />
+          <span>{expenseTag.name}</span>
+        </div>
+      ) : null;
+    }
+    return null;
   };
+  
   return (
     <div>
       {/* Tabela */}

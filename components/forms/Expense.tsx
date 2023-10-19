@@ -77,7 +77,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
     queryFn: async () => {
       const response = await axios.get("/api/expenses/tags");
       return response.data;
-    },
+    },  
   });
 
   const { mutate: createExpense, isLoading: isLoadingCreation } = useMutation<
@@ -216,7 +216,6 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                                 height={24}
                                 width={24}
                               />
-
                               {item.name}
                             </div>
                           </SelectItem>
