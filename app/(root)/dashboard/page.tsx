@@ -7,6 +7,13 @@ import React, { FC, useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
+import { IncomeTag } from "@prisma/client";
+
+interface IncomeTagData {
+  id: string;
+  name: string;
+  icon: string;
+}
 
 const Dashboard = () => {
   const { data: dataTransactions, isLoading: isLoadingTransactions } = useQuery(
@@ -18,10 +25,12 @@ const Dashboard = () => {
       },
     }
   );
-  const combinedData = dataTransactions?.map((item) => ({
-    ...item,
-    date: dayjs(item.date).format("DD/MM/YYYY"),
-  }));
+  const combinedData = dataTransactions?.map((item) => {
+    return {
+      ...item,
+      date: dayjs(item.date).format("DD/MM/YYYY"),
+    };
+  });
 
   return (
     <MaxWidthWrapper className="max-w-2xl mt-20 sm:mb-12 mb-40 sm:mt-15 flex flex-col items-center justify-center text-center">

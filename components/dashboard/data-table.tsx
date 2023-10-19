@@ -34,6 +34,10 @@ import { DataTablePagination } from "./data-table-pagination";
 import React, { useState } from "react";
 import { format, parse } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useQuery } from "@tanstack/react-query";
+import { ExpenseTag, IncomeTag } from "@prisma/client";
+import axios from "axios";
+import Image from "next/image";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -75,6 +79,61 @@ export function DataTable<TData, TValue>({
     } else {
       return "Data inválida";
     }
+  };
+  // fetch income tags
+  const { data: dataIncomeTags, isLoading: isLoadingIncomeTags } = useQuery<
+    IncomeTag[]
+  >({
+    queryKey: ["incomeTags"],
+    queryFn: async () => {
+      const response = await axios.get("/api/incomes/tags");
+      return response.data;
+    },
+  });
+  console.log(dataIncomeTags);
+
+  // fetch expense tags
+  const { data: dataExpenseTags, isLoading: isLoadingExpenseTags } = useQuery<
+    ExpenseTag[]
+  >({
+    queryKey: ["expenseTags"],
+    queryFn: async () => {
+      const response = await axios.get("/api/expenses/tags");
+      return response.data;
+    },
+  });
+
+  // Função para mapear os ícones com base no incomeTagId
+  const mapIncomeTagIcon = (incomeTagId: any, dataIncomeTags: any) => {
+    const incomeTag = dataIncomeTags.find((tag: any) => tag.id === incomeTagId);
+    return incomeTag ? (
+      <div className="flex gap-2 justify-start items-center text-start">
+        <Image
+          src={incomeTag.icon}
+          alt={incomeTag.name}
+          width={24}
+          height={24}
+        />
+        <span>{incomeTag.name}</span>
+      </div>
+    ) : null;
+  };
+  // Função para mapear os ícones com base no incomeTagId
+  const mapExpenseTagIcon = (expenseTagId: any, dataExpenseTags: any) => {
+    const expenseTag = dataExpenseTags.find(
+      (tag: any) => tag.id === expenseTagId
+    );
+    return expenseTag ? (
+      <div className="flex gap-2 justify-start items-center text-start">
+        <Image
+          src={expenseTag.icon}
+          alt={expenseTag.name}
+          width={24}
+          height={24}
+        />
+        <span>{expenseTag.name}</span>
+      </div>
+    ) : null;
   };
   return (
     <div>
@@ -155,15 +214,21 @@ export function DataTable<TData, TValue>({
                         cell.column.id === "tipo"
                           ? (data[row.index] as Transactions).incomeTagId
                             ? "Receita"
-                            : (data[row.index] as Transactions).expenseTagId
-                            ? "Despesa"
-                            : ""
+                            : "Despesa"
                           : cell.column.id === "descrição"
                           ? (data[row.index] as Transactions).description
                           : cell.column.id === "category"
                           ? (data[row.index] as Transactions).incomeTagId
-                            ? (data[row.index] as Transactions).incomeTagId
+                            ? mapIncomeTagIcon(
+                                (data[row.index] as Transactions).incomeTagId,
+                                dataIncomeTags
+                              )
                             : (data[row.index] as Transactions).expenseTagId
+                            ? mapExpenseTagIcon(
+                                (data[row.index] as Transactions).expenseTagId,
+                                dataExpenseTags
+                              )
+                            : null
                           : cell.column.id === "data"
                           ? formatDate((data[row.index] as Transactions).date)
                           : cell.column.id === "valor"

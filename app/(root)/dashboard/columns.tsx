@@ -20,7 +20,7 @@ export interface Transactions {
   id: string;
   description: string;
   value: number;
-  date: Date;
+  date: Date | string;
   userId: string;
   updatedAt: string;
   incomeTagId: string;

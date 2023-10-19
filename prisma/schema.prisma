@@ -66,7 +66,6 @@ model Income {
 model IncomeTag {
   id     String   @id @default(auto()) @map("_id") @db.ObjectId
   name   String
-  icon   String
   Income Income[]
 }
 
@@ -86,6 +85,5 @@ model Expense {
 model ExpenseTag {
   id      String    @id @default(auto()) @map("_id") @db.ObjectId
   name    String
-  icon    String
   Expense Expense[]
 }
