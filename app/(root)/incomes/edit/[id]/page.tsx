@@ -6,6 +6,8 @@ import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { FC } from "react";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface EditIncomePageProps {
   params: {

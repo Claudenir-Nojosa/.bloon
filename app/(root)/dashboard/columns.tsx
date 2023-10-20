@@ -51,7 +51,7 @@ export const columns: ColumnDef<Transactions>[] = [
     },
   },
   {
-    accessorKey: "category",
+    accessorKey: "categoria",
     header: "Categoria",
   },
   {
@@ -89,7 +89,11 @@ export const columns: ColumnDef<Transactions>[] = [
               Copiar descrição
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href={`/incomes/${transactions.id}`}>Ver detalhes</Link>
+              {transactions.incomeTagId ? (
+                <Link href={`/incomes/${transactions.id}`}>Ver detalhes</Link>
+              ) : (
+                <Link href={`/expenses/${transactions.id}`}>Ver detalhes</Link>
+              )}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>

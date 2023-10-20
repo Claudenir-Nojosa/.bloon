@@ -228,7 +228,7 @@ export function DataTable<TData, TValue>({
                           )
                         ) : cell.column.id === "descrição" ? (
                           (data[row.index] as Transactions).description
-                        ) : cell.column.id === "category" ? (
+                        ) : cell.column.id === "categoria" ? (
                           (data[row.index] as Transactions).incomeTagId ? (
                             mapIncomeTagIcon(
                               (data[row.index] as Transactions).incomeTagId,

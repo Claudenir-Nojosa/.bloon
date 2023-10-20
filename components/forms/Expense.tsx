@@ -247,7 +247,8 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                               !field.value && "text-muted-foreground"
                             )}
                           >
-                            {field.value && field.value instanceof Date ? (
+                            {field.value instanceof Date &&
+                            !isNaN(field.value.getTime()) ? (
                               format(field.value, "PPP", { locale: ptBR })
                             ) : (
                               <span className="text-zinc-400">

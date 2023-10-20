@@ -57,6 +57,7 @@ export const IncomeForm: FC<FormIncomeProps> = ({
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const form = useForm<z.infer<typeof IncomeSchema>>({
     resolver: zodResolver(IncomeSchema),
+    defaultValues: initialValue,
   });
   const { id } = params;
   const router = useRouter();
@@ -242,7 +243,8 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                               !field.value && "text-muted-foreground"
                             )}
                           >
-                            {field.value && field.value instanceof Date ? (
+                            {field.value instanceof Date &&
+                            !isNaN(field.value.getTime()) ? (
                               format(field.value, "PPP", { locale: ptBR })
                             ) : (
                               <span className="text-zinc-400">
@@ -278,7 +280,9 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                 render={({ field }) => (
                   <FormItem className="flex items-center text-end w-2/3 space-x-1 flex-row space-y-0 rounded-md justify-start">
                     <div>
-                      <FormLabel className="font-semibold px-2">Está pago ?</FormLabel>
+                      <FormLabel className="font-semibold px-2">
+                        Está pago ?
+                      </FormLabel>
                     </div>
                     <FormControl>
                       <Switch
