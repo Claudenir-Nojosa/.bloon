@@ -143,7 +143,7 @@ export function DataTable<TData, TValue>({
     }
     return null;
   };
-  
+
   return (
     <div>
       {/* Tabela */}
@@ -220,34 +220,58 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
-                        cell.column.id === "tipo"
-                          ? (data[row.index] as Transactions).incomeTagId
-                            ? "Receita"
-                            : "Despesa"
-                          : cell.column.id === "descrição"
-                          ? (data[row.index] as Transactions).description
-                          : cell.column.id === "category"
-                          ? (data[row.index] as Transactions).incomeTagId
-                            ? mapIncomeTagIcon(
-                                (data[row.index] as Transactions).incomeTagId,
-                                dataIncomeTags
-                              )
-                            : (data[row.index] as Transactions).expenseTagId
-                            ? mapExpenseTagIcon(
-                                (data[row.index] as Transactions).expenseTagId,
-                                dataExpenseTags
-                              )
-                            : null
-                          : cell.column.id === "data"
-                          ? formatDate((data[row.index] as Transactions).date)
-                          : cell.column.id === "valor"
-                          ? (
-                              data[row.index] as Transactions
-                            ).value.toLocaleString("pt-BR", {
-                              style: "currency",
-                              currency: "BRL",
-                            })
-                          : cell.column.columnDef.cell,
+                        cell.column.id === "tipo" ? (
+                          (data[row.index] as Transactions).incomeTagId ? (
+                            "Receita"
+                          ) : (
+                            "Despesa"
+                          )
+                        ) : cell.column.id === "descrição" ? (
+                          (data[row.index] as Transactions).description
+                        ) : cell.column.id === "category" ? (
+                          (data[row.index] as Transactions).incomeTagId ? (
+                            mapIncomeTagIcon(
+                              (data[row.index] as Transactions).incomeTagId,
+                              dataIncomeTags
+                            )
+                          ) : (data[row.index] as Transactions).expenseTagId ? (
+                            mapExpenseTagIcon(
+                              (data[row.index] as Transactions).expenseTagId,
+                              dataExpenseTags
+                            )
+                          ) : null
+                        ) : cell.column.id === "data" ? (
+                          formatDate((data[row.index] as Transactions).date)
+                        ) : cell.column.id === "valor" ? (
+                          (
+                            data[row.index] as Transactions
+                          ).value.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
+                          })
+                        ) : cell.column.id === "situação" ? (
+                          (data[row.index] as Transactions).paid ? (
+                            <div className="flex justify-center">
+                              <Image
+                                alt="Pago"
+                                src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/paid.png?raw=true"
+                                width={30}
+                                height={30}
+                              />
+                            </div>
+                          ) : (
+                            <div className="flex justify-center">
+                              <Image
+                                alt="Pago"
+                                src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/unpaid.png?raw=true"
+                                width={30}
+                                height={30}
+                              />
+                            </div>
+                          )
+                        ) : (
+                          cell.column.columnDef.cell
+                        ),
                         cell.getContext()
                       )}
                     </TableCell>

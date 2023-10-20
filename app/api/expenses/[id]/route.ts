@@ -39,6 +39,7 @@ export async function PATCH(req: Request, context: contextProps) {
         value: body.value,
         expenseTagId: body.expenseTagId,
         date: body.date,
+        paid: body.paid,
       },
     });
     return NextResponse.json({ message: "Update Success" }, { status: 200 });

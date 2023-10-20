@@ -59,6 +59,7 @@ model Income {
   updatedAt   DateTime  @updatedAt
   userId      String    @db.ObjectId
   incomeTagId String    @db.ObjectId
+  paid        Boolean   @default(false)
   IncomeTag   IncomeTag @relation(fields: [incomeTagId], references: [id])
   User        User      @relation(fields: [userId], references: [id])
 }
@@ -79,6 +80,7 @@ model Expense {
   updatedAt    DateTime   @updatedAt
   userId       String     @db.ObjectId
   expenseTagId String     @db.ObjectId
+  paid         Boolean    @default(false)
   ExpenseTag   ExpenseTag @relation(fields: [expenseTagId], references: [id])
   User         User       @relation(fields: [userId], references: [id])
 }

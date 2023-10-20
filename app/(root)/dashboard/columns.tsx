@@ -25,6 +25,7 @@ export interface Transactions {
   updatedAt: string;
   incomeTagId: string;
   expenseTagId: string;
+  paid: boolean;
 }
 
 export const columns: ColumnDef<Transactions>[] = [
@@ -62,10 +63,13 @@ export const columns: ColumnDef<Transactions>[] = [
     header: "Valor",
   },
   {
+    accessorKey: "situação",
+    header: "Situação",
+  },
+  {
     id: "ações",
     cell: ({ row }) => {
       const transactions = row.original;
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -77,16 +81,17 @@ export const columns: ColumnDef<Transactions>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuItem
+              className="cursor-pointer"
               onClick={() =>
                 navigator.clipboard.writeText(transactions.description)
               }
             >
               Copiar descrição
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Link href={`/incomes/${transactions.id}`}>Ver detalhes</Link>
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <DropdownMenuItem>
               {transactions.incomeTagId ? (
                 <ButtonAction id={transactions.id} isIncome={true} />
