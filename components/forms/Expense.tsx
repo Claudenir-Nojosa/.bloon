@@ -39,6 +39,7 @@ import { Calendar } from "../ui/calendar";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import Loading from "../Loading";
+import { Switch } from "../ui/switch";
 
 interface FormExpenseProps {
   isEditing: boolean;
@@ -77,7 +78,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
     queryFn: async () => {
       const response = await axios.get("/api/expenses/tags");
       return response.data;
-    },  
+    },
   });
 
   const { mutate: createExpense, isLoading: isLoadingCreation } = useMutation<
@@ -95,7 +96,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
       router.refresh();
     },
     onError: (data) => {
-      toast.error("Aconteceu um erro ao criar a Receita, tente novamente");
+      toast.error("Aconteceu um erro ao criar a despesa, tente novamente");
     },
   });
 
@@ -184,9 +185,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
               name="expenseTagId"
               render={({ field }) => (
                 <FormItem className="mt-4">
-                  <div className="flex justify-start items-center gap-5">
-                    <FormLabel>Categoria</FormLabel>
-                  </div>
+                  <FormLabel>Categoria</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -198,11 +197,10 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                           : ""
                       }
                     >
-                      <SelectTrigger className="w-full text-zinc-400 flex">
+                      <SelectTrigger className="w-full text-zinc-400">
                         <SelectValue placeholder={`${defaultValue}`} />
                       </SelectTrigger>
-
-                      <SelectContent className="bg-black text-zinc-300 flex flex-row justify-center items-center">
+                      <SelectContent className="bg-black text-zinc-300">
                         {dataExpenseTags?.map((item) => (
                           <SelectItem
                             className=""
@@ -216,6 +214,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                                 height={24}
                                 width={24}
                               />
+
                               {item.name}
                             </div>
                           </SelectItem>
@@ -227,6 +226,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                 </FormItem>
               )}
             />
+
             <div className="flex gap-2 justify-start items-end">
               <FormField
                 control={form.control}
@@ -276,7 +276,26 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                 )}
               />
             </div>
-            <div className="mt-10 gap-3 justify-end flex">
+            <div className="mt-10 gap-4 justify-end flex">
+              <FormField
+                control={form.control}
+                name="paid"
+                render={({ field }) => (
+                  <FormItem className="flex items-center text-end w-2/3 space-x-1 flex-row space-y-0 rounded-md justify-start">
+                    <div>
+                      <FormLabel className="font-semibold px-2">
+                        Está pago ?
+                      </FormLabel>
+                    </div>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
               <Button variant="outline">
                 <Link href="/">Cancelar</Link>
               </Button>

@@ -38,6 +38,8 @@ import { ptBR } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import Loading from "../Loading";
+import { Switch } from "../ui/switch";
+import { Checkbox } from "../ui/checkbox";
 
 interface FormIncomeProps {
   isEditing: boolean;
@@ -219,6 +221,7 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                 </FormItem>
               )}
             />
+
             <div className="flex gap-2 justify-start items-end">
               <FormField
                 control={form.control}
@@ -268,7 +271,24 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                 )}
               />
             </div>
-            <div className="mt-10 gap-3 justify-end flex">
+            <div className="mt-10 gap-4 justify-end flex">
+              <FormField
+                control={form.control}
+                name="paid"
+                render={({ field }) => (
+                  <FormItem className="flex items-center text-end w-2/3 space-x-1 flex-row space-y-0 rounded-md justify-start">
+                    <div>
+                      <FormLabel className="font-semibold px-2">Está pago ?</FormLabel>
+                    </div>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
               <Button variant="outline">
                 <Link href="/">Cancelar</Link>
               </Button>

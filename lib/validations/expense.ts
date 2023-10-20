@@ -15,4 +15,5 @@ export const ExpenseSchema = z.object({
     required_error: "Selecione uma data",
     invalid_type_error: "Isso não é uma data!",
   }),
+  paid: z.boolean().default(false).optional(),
 });
