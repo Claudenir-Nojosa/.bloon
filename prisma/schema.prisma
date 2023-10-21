@@ -86,8 +86,9 @@ model Expense {
 }
 
 model ExpenseTag {
-  id      String    @id @default(auto()) @map("_id") @db.ObjectId
-  name    String
-  icon    String
-  Expense Expense[]
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  icon         String
+  monthlyLimit Float? 
+  Expense      Expense[]
 }
