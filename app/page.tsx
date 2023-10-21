@@ -4,9 +4,13 @@ import { title as textTitle } from "@/components/shared/primitives";
 import React from "react";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { AreaChart, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Budget from "@/components/Budget";
+import Saldo from "@/components/saldo";
+import AcessoRapido from "@/components/AcessoRapido";
+import ContasAPagar from "@/components/ContasAPagar";
+import ContasAReceber from "@/components/ContasAReceber";
 
 const page = async () => {
   const session = await auth();
@@ -185,29 +189,11 @@ const page = async () => {
           </div>
         </>
       ) : (
-        <div>
-          <div className="font-bold text-center justify-center flex flex-col items-center gap-3">
-            <p className={textTitle({ color: "violet" })}>Olá,</p>
-            <pre className="text-2xl">{session?.user?.name}</pre>
-            {session?.user?.image === null ? (
-              ""
-            ) : (
-              <Image
-                className="rounded-full"
-                src={session?.user?.image || ""}
-                height={100}
-                width={100}
-                alt={`${session?.user?.name} profile pic`}
-              />
-            )}
-            <Button
-              className="mt-10 rounded-2xl border border-purple-900"
-              variant="outline"
-            >
-              <Link href="/dashboard">Verificar carteira!</Link>
-            </Button>
-            <Budget />
-          </div>
+        <div className="flex">
+          <Saldo />
+          <AcessoRapido />
+          <ContasAPagar />
+          <ContasAReceber />
         </div>
       )}
     </MaxWidthWrapper>

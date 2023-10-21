@@ -60,7 +60,7 @@ const Budget = () => {
     0
   );
   const difference = incomeTotal - expenseTotal;
-  const formattedDifference = numeral(difference).format("0,0.00");
+  const formattedDifference = numeral(difference).format("0.00");
 
   const colorClass =
     difference > 0 && showData
@@ -87,8 +87,8 @@ const Budget = () => {
       <Button variant="ghost" size="icon" onClick={() => showDataHandler()}>
         {showData ? <Eye /> : <EyeOff />}
       </Button>
-      <p className={`text-2xl ${colorClass}`}>
-        Saldo Atual: {showData ? <span>R$ {formattedDifference}</span> : "--"}
+      <p className={`text-2xl ${colorClass} flex-col flex`}>
+        Saldo Geral {showData ? <span>R$ {formattedDifference}</span> : "--"}
       </p>
       <p>
         Total de Receitas:{" "}
