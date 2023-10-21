@@ -117,6 +117,9 @@ const Goals = () => {
     const currentMonthIndex = months.indexOf(selectedMonth || "");
     if (currentMonthIndex > 0) {
       setSelectedMonth(months[currentMonthIndex - 1]);
+    } else {
+      // Se estiver em janeiro, volte para dezembro
+      setSelectedMonth(months[months.length - 1]);
     }
   };
 
@@ -124,6 +127,9 @@ const Goals = () => {
     const currentMonthIndex = months.indexOf(selectedMonth || "");
     if (currentMonthIndex < months.length - 1) {
       setSelectedMonth(months[currentMonthIndex + 1]);
+    } else {
+      // Se estiver em dezembro, volte para janeiro
+      setSelectedMonth(months[0]);
     }
   };
 

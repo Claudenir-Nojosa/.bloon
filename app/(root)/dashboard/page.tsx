@@ -121,6 +121,9 @@ const Dashboard = () => {
     const currentMonthIndex = months.indexOf(selectedMonth || "");
     if (currentMonthIndex > 0) {
       setSelectedMonth(months[currentMonthIndex - 1]);
+    } else {
+      // Se estiver em janeiro, volte para dezembro
+      setSelectedMonth(months[months.length - 1]);
     }
   };
 
@@ -128,6 +131,9 @@ const Dashboard = () => {
     const currentMonthIndex = months.indexOf(selectedMonth || "");
     if (currentMonthIndex < months.length - 1) {
       setSelectedMonth(months[currentMonthIndex + 1]);
+    } else {
+      // Se estiver em dezembro, volte para janeiro
+      setSelectedMonth(months[0]);
     }
   };
 
@@ -154,7 +160,11 @@ const Dashboard = () => {
                 setSelectedYear(year);
                 setSelectedMonth("Todo o ano");
               }}
-              className={selectedYear === year ? "bg-[#9633d9] text-white border-black" : ""}
+              className={
+                selectedYear === year
+                  ? "bg-[#9633d9] text-white border-black"
+                  : ""
+              }
             >
               {year}
             </Button>
