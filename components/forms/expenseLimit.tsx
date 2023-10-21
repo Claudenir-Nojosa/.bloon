@@ -23,6 +23,7 @@ import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import Image from "next/image";
 import { ExpenseTagSchema } from "@/lib/validations/tags";
 import { FC } from "react";
+import Loading from "../Loading";
 
 interface ExpenseLimitFormProps {
   data: {
@@ -64,11 +65,12 @@ export const ExpenseLimitForm: FC<ExpenseLimitFormProps> = ({ data }) => {
   }
 
   return (
-    <Card className="border rounded-2xl p-2 pb-2 mt-6 min-w-[20rem]">
+    <Card className="bg-transparent shadow-none">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <CardHeader className="flex flex-col text-lg  dark:text-zinc-300 justify-center items-center text-center">
+          <CardHeader className="flex flex-col text-2xl gap-3  dark:text-zinc-300 justify-center items-center text-center font-semibold">
             <Image src={data.icon} alt={data.name} width={60} height={60} />
+            {data.name}
           </CardHeader>
           <CardBody>
             <FormField
@@ -76,7 +78,7 @@ export const ExpenseLimitForm: FC<ExpenseLimitFormProps> = ({ data }) => {
               name="monthlyLimit"
               render={({ field }) => (
                 <FormItem className="mt-4">
-                  <FormLabel>Limite de Gasto</FormLabel>
+                  <FormLabel className="text-xl">Limite de Gasto</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Insira aqui o limite da despesa"
@@ -94,7 +96,7 @@ export const ExpenseLimitForm: FC<ExpenseLimitFormProps> = ({ data }) => {
                 <Link href="/">Cancelar</Link>
               </Button>
               <Button variant="outline" type="submit">
-                Salvar Limite
+                {isLoadingEditExpenseTagLimit ? <Loading /> : "Salvar Limite"}
               </Button>
             </div>
           </CardBody>
