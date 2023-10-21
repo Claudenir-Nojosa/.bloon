@@ -187,7 +187,7 @@ const page = async () => {
       ) : (
         <div>
           <div className="font-bold text-center justify-center flex flex-col items-center gap-3">
-            <p className={textTitle({ color: "violet" })}>Seja bem vindo!</p>
+            <p className={textTitle({ color: "violet" })}>Olá,</p>
             <pre className="text-2xl">{session?.user?.name}</pre>
             {session?.user?.image === null ? (
               ""

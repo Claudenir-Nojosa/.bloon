@@ -138,7 +138,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader className="flex flex-col text-lg  dark:text-zinc-300 justify-center items-center text-center">
             <Image
-              src="/assets/expense.svg"
+              src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/expensesIcon.png?raw=true"
               alt="Expense Image"
               height={60}
               width={60}
@@ -283,11 +283,9 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                 name="paid"
                 render={({ field }) => (
                   <FormItem className="flex items-center text-end w-2/3 space-x-1 flex-row space-y-0 rounded-md justify-start">
-                    <div>
-                      <FormLabel className="font-semibold px-2">
-                        Está pago ?
-                      </FormLabel>
-                    </div>
+                    <FormLabel className="font-medium text-zinc-300 px-2">
+                      Está pago ?
+                    </FormLabel>
                     <FormControl>
                       <Switch
                         checked={field.value}

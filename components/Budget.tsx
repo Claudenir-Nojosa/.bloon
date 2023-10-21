@@ -6,6 +6,9 @@ import numeral from "numeral";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import Loading from "./Loading";
+import { useState } from "react";
+import { Button } from "./ui/button";
+import { Eye, EyeOff } from "lucide-react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -20,6 +23,11 @@ export interface Transactions {
   expenseTagId: string;
 }
 const Budget = () => {
+  const [showData, setShowData] = useState(false);
+
+  const showDataHandler = () => {
+    setShowData(!showData);
+  };
   const { data: dataTransactions, isLoading: isLoadingTransactions } = useQuery(
     {
       queryKey: ["combinedData"],
@@ -55,9 +63,9 @@ const Budget = () => {
   const formattedDifference = numeral(difference).format("0,0.00");
 
   const colorClass =
-    difference > 0
+    difference > 0 && showData
       ? "text-green-700"
-      : difference === 0
+      : difference === 0 || !showData
       ? "text-foreground"
       : "text-red-700";
 
@@ -76,19 +84,30 @@ const Budget = () => {
   const options = {};
   return (
     <div className="font-semibold text-lg  gap-3 flex flex-col">
+      <Button variant="ghost" size="icon" onClick={() => showDataHandler()}>
+        {showData ? <Eye /> : <EyeOff />}
+      </Button>
       <p className={`text-2xl ${colorClass}`}>
-        Saldo Atual: <span>R$ {formattedDifference}</span>
+        Saldo Atual: {showData ? <span>R$ {formattedDifference}</span> : "--"}
       </p>
       <p>
         Total de Receitas:{" "}
-        <span>R$ {numeral(incomeTotal).format("0,0.00")}</span>
+        {showData ? (
+          <span>R$ {numeral(incomeTotal).format("0,0.00")}</span>
+        ) : (
+          "--"
+        )}
       </p>
       <p>
         Total de Despesas:{" "}
-        <span>R$ {numeral(expenseTotal).format("0,0.00")}</span>
+        {showData ? (
+          <span>R$ {numeral(expenseTotal).format("0,0.00")}</span>
+        ) : (
+          "--"
+        )}
       </p>
       <div className="mt-4 mb-20">
-        <Doughnut data={data} options={options} />
+        {showData ? <Doughnut data={data} options={options} /> : ""}
       </div>
     </div>
   );

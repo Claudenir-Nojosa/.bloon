@@ -139,7 +139,7 @@ const Goals = () => {
       <p className="text-zinc-400 mb-14">
         Para editar os limites, basta clicar no ícone da categoria
       </p>
-      <div className="min-w-[300px] justify-center mt-4 mb-8 flex text-center items-center">
+      <div className="justify-start w-full mb-8 flex text-center items-center">
         <button className="mr-3 text-5xl" onClick={goToPreviousMonth}>
           <ChevronLeft />
         </button>
