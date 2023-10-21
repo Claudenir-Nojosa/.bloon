@@ -33,6 +33,6 @@
     "app/api/incomes/route.js",
     "app/api/transactions/route.js",
     "app/api/expenses/[id]/route.ts"
-  ],
+, "app/(root)/goals/page.jsx"  ],
   "exclude": ["node_modules"]
 }

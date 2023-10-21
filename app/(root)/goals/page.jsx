@@ -28,15 +28,9 @@ import { ExpenseLimitForm } from "@/components/forms/expenseLimit";
 import numeral from "numeral";
 import { Progress } from "@/components/ui/progress";
 
-type Expense = PrismaExpense & {
-  ExpenseTag: ExpenseTag;
-};
-
 const Goals = () => {
   // fetch expense tags
-  const { data: dataExpenseTags, isLoading: isLoadingExpenseTags } = useQuery<
-    ExpenseTag[]
-  >({
+  const { data: dataExpenseTags, isLoading: isLoadingExpenseTags } = useQuery({
     queryKey: ["expenseTags"],
     queryFn: async () => {
       const response = await axios.get("/api/expenses/tags");
@@ -45,9 +39,7 @@ const Goals = () => {
   });
   console.log(dataExpenseTags);
   //Fetch Expenses values
-  const { data: dataExpense, isLoading: isLoadingExpense } = useQuery<
-    Expense[]
-  >({
+  const { data: dataExpense, isLoading: isLoadingExpense } = useQuery({
     queryKey: ["expenses"],
     queryFn: async () => {
       const response = await axios.get("/api/expenses/");
@@ -55,7 +47,7 @@ const Goals = () => {
     },
   });
   console.log(dataExpense);
-  const calculateProgressValue = (tagId: string, expenses: Expense[]) => {
+  const calculateProgressValue = (tagId, expenses) => {
     const expensesWithSameTag = expenses.filter(
       (expense) => expense.expenseTagId === tagId
     );
