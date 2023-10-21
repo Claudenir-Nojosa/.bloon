@@ -65,10 +65,11 @@ model Income {
 }
 
 model IncomeTag {
-  id     String   @id @default(auto()) @map("_id") @db.ObjectId
-  name   String
-  icon   String
-  Income Income[]
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  icon         String
+  monthlyLimit Float?
+  Income       Income[]
 }
 
 model Expense {
@@ -89,6 +90,6 @@ model ExpenseTag {
   id           String    @id @default(auto()) @map("_id") @db.ObjectId
   name         String
   icon         String
-  monthlyLimit Float? 
+  monthlyLimit Float?
   Expense      Expense[]
 }
