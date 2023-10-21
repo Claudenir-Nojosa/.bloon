@@ -38,17 +38,23 @@ const Goals = () => {
         <Button variant="ghost">
           <Dialog>
             <DialogTrigger asChild>
-              <Image src={tag.icon} alt={tag.name} height={60} width={60} />
+              <Image
+                key={tag.id}
+                src={tag.icon}
+                alt={tag.name}
+                height={60}
+                width={60}
+              />
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
               <ExpenseLimitForm
-                  data={{
-                    id: tag.id,
-                    name: tag.name,
-                    icon: tag.icon,
-                    monthlyLimit: tag.monthlyLimit,
-                  }}
-                />
+                data={{
+                  id: tag.id,
+                  name: tag.name,
+                  icon: tag.icon,
+                  monthlyLimit: tag.monthlyLimit,
+                }}
+              />
             </DialogContent>
           </Dialog>
         </Button>
