@@ -14,6 +14,7 @@ export async function GET() {
         description: true,
         value: true,
         date: true,
+        paid: true,
         expenseTagId: true,
         ExpenseTag: true,
         User: true,
