@@ -14,7 +14,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 
 const Saldo = () => {
-  const currentMonth = dayjs().locale("pt-br").format("MMMM");
+  const currentMonth = dayjs().format("MMMM");
   const [selectedMonth, setSelectedMonth] = useState(currentMonth);
   const [showData, setShowData] = useState(false);
   const { data: session, status } = useSession();
