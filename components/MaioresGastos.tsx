@@ -60,6 +60,12 @@ const MaioresGastos = () => {
 
   const topExpenses = sortedExpenses.slice(0, 2);
   console.log(topExpenses);
+  function formatCurrency(value: any) {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(value);
+  }
   return (
     <Card className="min-h-fit">
       <CardHeader>
@@ -90,7 +96,7 @@ const MaioresGastos = () => {
                   </span>
                 </div>
                 <p className="text-red-500 font-semibold">
-                  Valor: R$ {expense.value.toFixed(2)}
+                  Valor: R$ {formatCurrency(expense.value)}
                 </p>
               </Badge>
             </div>

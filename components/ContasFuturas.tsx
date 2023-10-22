@@ -30,7 +30,13 @@ const ContasFuturas = () => {
     (expense: any) => !expense.paid
   );
   const topExpensesSliced = unpaidExpenses ? unpaidExpenses.slice(0, 2) : [];
-
+  
+  function formatCurrency(value: any) {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(value);
+  }
   return (
     <Card className="min-h-fit">
       <CardHeader>
@@ -61,7 +67,7 @@ const ContasFuturas = () => {
                   </span>
                 </div>
                 <p className="text-red-500 font-semibold">
-                  Valor: R$ {expense.value.toFixed(2)}
+                  Valor: R$ {formatCurrency(expense.value)}
                 </p>
               </Badge>
             </div>

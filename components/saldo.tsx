@@ -104,6 +104,14 @@ const Saldo = () => {
   };
 
   console.log(filteredExpenses);
+
+  function formatCurrency(value: any) {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(value);
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -144,9 +152,9 @@ const Saldo = () => {
                   <div>
                     <p>Receita mensal</p>
                     {showData ? (
-                      <span className="text-green-500">{`R$ ${totalIncomeValue.toFixed(
-                        2
-                      )}`}</span>
+                      <span className="text-green-500">
+                        {showData ? formatCurrency(totalIncomeValue) : "R$ --"}
+                      </span>
                     ) : (
                       <span className="text-green-500">R$ --</span>
                     )}
@@ -156,9 +164,9 @@ const Saldo = () => {
                   <div>
                     <p>Despesa mensal</p>
                     {showData ? (
-                      <span className="text-red-500">{`R$ ${totalExpenseValue.toFixed(
-                        2
-                      )}`}</span>
+                      <span className="text-red-500">
+                        {showData ? formatCurrency(totalExpenseValue) : "R$ --"}
+                      </span>
                     ) : (
                       <span className="text-red-500">R$ --</span>
                     )}

@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const page = () => {
+const RegisterPage = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -17,4 +17,4 @@ const page = () => {
   return <RegisterForm />;
 };
 
-export default page;
+export default RegisterPage;

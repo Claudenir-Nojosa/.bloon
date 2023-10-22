@@ -64,7 +64,7 @@ const Budget = () => {
     0
   );
   const difference = incomeTotal - expenseTotal;
-  const formattedDifference = numeral(difference).format("0.00");
+  const formattedDifference = formatCurrency(difference);
 
   const colorClass =
     difference > 0 && showData
@@ -86,6 +86,13 @@ const Budget = () => {
     hoverOffset: 40,
   };
   const options = {};
+  
+  function formatCurrency(value: any) {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(value);
+  }
   return (
     <Card>
       <CardContent>
@@ -111,7 +118,7 @@ const Budget = () => {
                 <p>
                   Total de Receitas:{" "}
                   {showData ? (
-                    <span>R$ {numeral(incomeTotal).format("0,0.00")}</span>
+                    <span>R$ {formatCurrency(incomeTotal)}</span>
                   ) : (
                     "--"
                   )}
@@ -119,7 +126,7 @@ const Budget = () => {
                 <p>
                   Total de Despesas:{" "}
                   {showData ? (
-                    <span>R$ {numeral(expenseTotal).format("0,0.00")}</span>
+                    <span>R$ {formatCurrency(expenseTotal)}</span>
                   ) : (
                     "--"
                   )}

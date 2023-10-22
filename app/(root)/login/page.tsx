@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import LoginForm from "@/components/forms/Login";
 
-const page = () => {
+const LoginPage = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -17,4 +17,4 @@ const page = () => {
   return <LoginForm />;
 };
 
-export default page;
+export default LoginPage;
