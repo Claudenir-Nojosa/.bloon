@@ -33,7 +33,7 @@ const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
       onSuccess: (data) => {
         // Faça o redirecionamento após o delete bem-sucedido
         toast.success("Despesa deletada com sucesso!");
-        router.push("/dashboard");
+        router.push("/");
         router.refresh();
       },
       onError: (data) => {
@@ -48,7 +48,7 @@ const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
       onSuccess: (data) => {
         // Faça o redirecionamento após o delete bem-sucedido
         toast.success("Receita deletada com sucesso!");
-        router.push("/dashboard");
+        router.push("/");
         router.refresh();
       },
       onError: (data) => {

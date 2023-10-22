@@ -17,7 +17,7 @@ const AcessoRapido = () => {
   return (
     <Card className=" dark:border-purple-950 dark:bg-gradient-to-r from-purple-900 via-purple-950 to-black">
       <CardHeader className="text-start">
-        <h2 className="font-semibold mb-8">Acesso rápido</h2>
+        <h2 className="font-semibold mb-8 text-2xl">Acesso rápido</h2>
       </CardHeader>
       <CardContent>
         <div className="w-full flex justify-between gap-20">
