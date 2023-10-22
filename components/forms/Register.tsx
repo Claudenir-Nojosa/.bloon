@@ -13,7 +13,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { RegisterSchema } from "@/lib/validations/user";
@@ -22,7 +22,23 @@ import { title as textTitle } from "../shared/primitives";
 import MaxWidthWrapper from "../shared/MaxWidthWrapper";
 import Image from "next/image";
 import { GithubIcon, GoogleIcon } from "../shared/icons";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+
 const RegisterForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  });
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const router = useRouter();
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -52,6 +68,7 @@ const RegisterForm = () => {
       console.log(error);
     }
   };
+
   const onSubmit: SubmitHandler<z.infer<typeof RegisterSchema>> = async (
     values
   ) => {
@@ -70,8 +87,8 @@ const RegisterForm = () => {
           },
         }
       );
-
       const user = response.data;
+      toast.success("Conta criada com sucesso.");
       router.push("/login");
     } catch (error) {
       console.error("Error registering user:", error);
@@ -125,7 +142,26 @@ const RegisterForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input type="password" placeholder="Senha" {...field} />
+                      <div className="relative">
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Sua senha"
+                          {...field}
+                        />
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 cursor-pointer">
+                          {showPassword ? (
+                            <EyeIcon
+                              className="h-6 w-6"
+                              onClick={togglePasswordVisibility}
+                            />
+                          ) : (
+                            <EyeOffIcon
+                              className="h-6 w-6"
+                              onClick={togglePasswordVisibility}
+                            />
+                          )}
+                        </div>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

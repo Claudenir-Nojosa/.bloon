@@ -15,18 +15,23 @@ import * as z from "zod";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { LoginSchema } from "@/lib/validations/user";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
-import { title as textTitle } from "../shared/primitives";
 import Image from "next/image";
 import MaxWidthWrapper from "../shared/MaxWidthWrapper";
-import { LockKeyhole } from "lucide-react";
 import { GithubIcon, GoogleIcon } from "../shared/icons";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { toast } from "sonner";
 
 const LoginForm = () => {
   const session = useSession();
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   useEffect(() => {
     if (session.status === "authenticated") {
@@ -72,7 +77,11 @@ const LoginForm = () => {
       });
 
       if (res?.error == null) {
+        toast.success("Login efetuado com sucesso.");
         router.push("/");
+        router.refresh();
+      } else {
+        toast.error("Erro ao realizar login, tente novamente.");
       }
     } catch (error) {
       console.log(error);
@@ -113,7 +122,26 @@ const LoginForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input type="password" placeholder="Senha" {...field} />
+                      <div className="relative">
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Sua senha"
+                          {...field}
+                        />
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 cursor-pointer">
+                          {showPassword ? (
+                            <EyeIcon
+                              className="h-6 w-6"
+                              onClick={togglePasswordVisibility}
+                            />
+                          ) : (
+                            <EyeOffIcon
+                              className="h-6 w-6"
+                              onClick={togglePasswordVisibility}
+                            />
+                          )}
+                        </div>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -47,16 +47,12 @@ const Budget = () => {
   );
   console.log(dataTransactions);
 
-  if (isLoadingTransactions) {
+  if (!dataTransactions) {
     return (
-      <div className="mt-4">
+      <div className="flex justify-center items-center">
         <Loading />
       </div>
     );
-  }
-
-  if (!dataTransactions) {
-    return <div>Dados não disponíveis.</div>;
   }
 
   const incomeData = dataTransactions.filter((income) => income.incomeTagId);
@@ -94,34 +90,46 @@ const Budget = () => {
     <Card>
       <CardContent>
         <div className="flex flex-col items-center text-start mt-5 justify-center">
-          <Button variant="ghost" size="icon" onClick={() => showDataHandler()}>
-            {showData ? <Eye /> : <EyeOff />}
-          </Button>
-          <div className="flex flex-col text-start mt-5">
-            <p className={`${colorClass}`}>
-              Saldo Geral{" "}
-              {showData ? <span>R$ {formattedDifference}</span> : "--"}
-            </p>
-            <p>
-              Total de Receitas:{" "}
-              {showData ? (
-                <span>R$ {numeral(incomeTotal).format("0,0.00")}</span>
-              ) : (
-                "--"
-              )}
-            </p>
-            <p>
-              Total de Despesas:{" "}
-              {showData ? (
-                <span>R$ {numeral(expenseTotal).format("0,0.00")}</span>
-              ) : (
-                "--"
-              )}
-            </p>
-          </div>
-          <div className="w-2/3 mt-10">
-            <Doughnut data={data} options={options} />
-          </div>
+          {isLoadingTransactions && !dataTransactions ? (
+            <div>
+              <Loading />
+            </div>
+          ) : (
+            <>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => showDataHandler()}
+              >
+                {showData ? <Eye /> : <EyeOff />}
+              </Button>
+              <div className="flex flex-col text-start mt-5">
+                <p className={`${colorClass}`}>
+                  Saldo Geral{" "}
+                  {showData ? <span>R$ {formattedDifference}</span> : "--"}
+                </p>
+                <p>
+                  Total de Receitas:{" "}
+                  {showData ? (
+                    <span>R$ {numeral(incomeTotal).format("0,0.00")}</span>
+                  ) : (
+                    "--"
+                  )}
+                </p>
+                <p>
+                  Total de Despesas:{" "}
+                  {showData ? (
+                    <span>R$ {numeral(expenseTotal).format("0,0.00")}</span>
+                  ) : (
+                    "--"
+                  )}
+                </p>
+              </div>
+              <div className="w-2/3 mt-24">
+                <Doughnut data={data} options={options} />
+              </div>
+            </>
+          )}
         </div>
       </CardContent>
     </Card>
