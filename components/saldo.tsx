@@ -1,16 +1,34 @@
+"use client";
+
 import { Button } from "./ui/button";
-import { AreaChart } from "lucide-react";
+import { AreaChart, Eye, EyeOff, Wallet } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { auth } from "@/lib/auth";
+import { useSession } from "next-auth/react";
 import { title as textTitle } from "@/components/shared/primitives";
 import Budget from "./Budget";
+import { useState } from "react";
+import { Badge } from "./ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-const Saldo = async () => {
-  const session = await auth();
+const Saldo = () => {
+  const [showData, setShowData] = useState(false);
+  const { data: session, status } = useSession();
+
+  const showDataHandler = () => {
+    setShowData(!showData);
+  };
+
   return (
-    <div className="w-full flex flex-col justify-start items-start gap-2">
-      <div className="mb-4 flex flex-col justify-start items-start gap-2">
+    <Card>
+      <CardHeader>
         <div className="flex items-center w-full">
           <p className="text-4xl">
             Olá,{" "}
@@ -20,30 +38,65 @@ const Saldo = async () => {
             <span> 🪙</span>
           </p>
         </div>
-      </div>
+      </CardHeader>
+      <CardContent>
+        <div className="w-full flex flex-col justify-end items-start gap-2">
+          <div className="mb-4"></div>
+          {session?.user?.image === null ? (
+            ""
+          ) : (
+            <div>
+              <div className="flex gap-5 items-center">
+                <Image
+                  className="rounded-full"
+                  src={session?.user?.image || ""}
+                  height={80}
+                  width={80}
+                  alt={`${session?.user?.name} profile pic`}
+                />
 
-      {session?.user?.image === null ? (
-        ""
-      ) : (
-        <div className="flex gap-5 items-center">
-          <Image
-            className="rounded-full"
-            src={session?.user?.image || ""}
-            height={80}
-            width={80}
-            alt={`${session?.user?.name} profile pic`}
-          />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => showDataHandler()}
+                >
+                  {showData ? <Eye /> : <EyeOff />}
+                </Button>
+                <Badge variant="outline">
+                  <div>
+                    <p>Receita mensal</p>
+                    {showData ? (
+                      <span className="text-green-500">R$ 0,00</span>
+                    ) : (
+                      <span className="text-green-500">R$ --</span>
+                    )}
+                  </div>
+                </Badge>
+                <Badge variant="outline">
+                  <div>
+                    <p>Despesa mensal</p>
+                    {showData ? (
+                      <span className="text-red-500">R$ 0,00</span>
+                    ) : (
+                      <span className="text-red-500">R$ --</span>
+                    )}
+                  </div>
+                </Badge>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="flex items-end">
           <Button
-            className="mt-10 rounded-2xl gap-2 border border-purple-900"
+            className="mt-10 rounded-md gap-2 border bg-transparent border-purple-900"
             variant="outline"
           >
-            <AreaChart />
+            <Wallet />
             <Link href="/dashboard">Verificar carteira!</Link>
           </Button>
         </div>
-      )}
-      <Budget />
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

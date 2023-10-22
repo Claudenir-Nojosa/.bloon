@@ -9,14 +9,14 @@ import Image from "next/image";
 import Budget from "@/components/Budget";
 import Saldo from "@/components/saldo";
 import AcessoRapido from "@/components/AcessoRapido";
-import ContasAPagar from "@/components/ContasAPagar";
-import ContasAReceber from "@/components/ContasAReceber";
+import ContasFuturas from "@/components/ContasFuturas";
+import MaioresGastos from "@/components/MaioresGastos";
 
 const page = async () => {
   const session = await auth();
   console.log(session);
   return (
-    <MaxWidthWrapper className="mb-12 mt-14 sm:mt-15 flex flex-col items-center justify-center text-center">
+    <MaxWidthWrapper className="mb-12 mt-14 sm:mt-15 flex flex-col justify-between text-center">
       {!session?.user ? (
         <>
           <div className="mx-auto mb-4 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full border border-gray-200 bg-white px-7 py-2 shadow-md backdrop-blur transition-all hover:border-gray-300 hover:bg-white/80">
@@ -24,35 +24,37 @@ const page = async () => {
               .bloon agora em produção!
             </p>
           </div>
-          <h1
-            className={`max-w-3xl text-5xl font-bold md:text-6xl lg:text-7xl ${textTitle(
-              { size: "lg" }
-            )}`}
-          >
-            Aplicação{" "}
-            <span
-              className={`max-w-3xl text-[3.1rem] font-bold md:text-6xl lg:text-7xl ${textTitle(
-                { color: "violet" }
+          <div className="items-center flex flex-col justify-between text-center">
+            <h1
+              className={`max-w-3xl text-5xl font-bold md:text-6xl lg:text-7xl ${textTitle(
+                { size: "lg" }
               )}`}
             >
-              financeira
-            </span>{" "}
-            com um controle prático e simplificado.
-          </h1>
-          <p className="mt-5 max-w-prose text-zinc-500 sm:text-lg">
-            Crie um planejamento financeiro em questão de minutos.
-          </p>
-          <Link
-            className={`bg-gradient-to-r from-purple-700 via-purple-500 to-purple-700 ${buttonVariants(
-              {
-                size: "lg",
-                className: "mt-5",
-              }
-            )}`}
-            href="/login"
-          >
-            Comece agora <ArrowRight className="ml-2 h-5 w-5" />
-          </Link>
+              Aplicação{" "}
+              <span
+                className={`max-w-3xl text-[3.1rem] font-bold md:text-6xl lg:text-7xl ${textTitle(
+                  { color: "violet" }
+                )}`}
+              >
+                financeira
+              </span>{" "}
+              com um controle prático e simplificado.
+            </h1>
+            <p className="mt-5 max-w-prose text-zinc-500 sm:text-lg">
+              Crie um planejamento financeiro em questão de minutos.
+            </p>
+            <Link
+              className={`bg-gradient-to-r from-purple-700 via-purple-500 to-purple-700 ${buttonVariants(
+                {
+                  size: "lg",
+                  className: "mt-5",
+                }
+              )}`}
+              href="/login"
+            >
+              Comece agora <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </div>
           {/* Background */}
           <div>
             <div className="relative isolate">
@@ -189,11 +191,14 @@ const page = async () => {
           </div>
         </>
       ) : (
-        <div className="flex">
+        <div className="grid grid-cols-2 gap-5">
           <Saldo />
           <AcessoRapido />
-          <ContasAPagar />
-          <ContasAReceber />
+          <Budget />
+          <div className="w-auto flex flex-col gap-6">
+            <ContasFuturas />
+            <MaioresGastos />
+          </div>
         </div>
       )}
     </MaxWidthWrapper>

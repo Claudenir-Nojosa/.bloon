@@ -9,6 +9,14 @@ import Loading from "./Loading";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Eye, EyeOff } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -83,33 +91,40 @@ const Budget = () => {
   };
   const options = {};
   return (
-    <div className="font-semibold text-lg  gap-3 flex flex-col">
-      <Button variant="ghost" size="icon" onClick={() => showDataHandler()}>
-        {showData ? <Eye /> : <EyeOff />}
-      </Button>
-      <p className={`text-2xl ${colorClass} flex-col flex`}>
-        Saldo Geral {showData ? <span>R$ {formattedDifference}</span> : "--"}
-      </p>
-      <p>
-        Total de Receitas:{" "}
-        {showData ? (
-          <span>R$ {numeral(incomeTotal).format("0,0.00")}</span>
-        ) : (
-          "--"
-        )}
-      </p>
-      <p>
-        Total de Despesas:{" "}
-        {showData ? (
-          <span>R$ {numeral(expenseTotal).format("0,0.00")}</span>
-        ) : (
-          "--"
-        )}
-      </p>
-      <div className="mt-4 mb-20">
-        {showData ? <Doughnut data={data} options={options} /> : ""}
-      </div>
-    </div>
+    <Card>
+      <CardContent>
+        <div className="flex flex-col items-center text-start mt-5 justify-center">
+          <Button variant="ghost" size="icon" onClick={() => showDataHandler()}>
+            {showData ? <Eye /> : <EyeOff />}
+          </Button>
+          <div className="flex flex-col text-start mt-5">
+            <p className={`${colorClass}`}>
+              Saldo Geral{" "}
+              {showData ? <span>R$ {formattedDifference}</span> : "--"}
+            </p>
+            <p>
+              Total de Receitas:{" "}
+              {showData ? (
+                <span>R$ {numeral(incomeTotal).format("0,0.00")}</span>
+              ) : (
+                "--"
+              )}
+            </p>
+            <p>
+              Total de Despesas:{" "}
+              {showData ? (
+                <span>R$ {numeral(expenseTotal).format("0,0.00")}</span>
+              ) : (
+                "--"
+              )}
+            </p>
+          </div>
+          <div className="w-2/3 mt-10">
+            <Doughnut data={data} options={options} />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
