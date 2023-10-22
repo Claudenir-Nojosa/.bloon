@@ -40,6 +40,7 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import Loading from "../Loading";
 import { Switch } from "../ui/switch";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface FormExpenseProps {
   isEditing: boolean;
@@ -200,25 +201,27 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                       <SelectTrigger className="w-full text-zinc-400">
                         <SelectValue placeholder={`${defaultValue}`} />
                       </SelectTrigger>
-                      <SelectContent className="bg-black text-zinc-300">
-                        {dataExpenseTags?.map((item) => (
-                          <SelectItem
-                            className=""
-                            key={item.id}
-                            value={item.id}
-                          >
-                            <div className="flex justify-between items-center gap-3">
-                              <Image
-                                alt={item.name}
-                                src={item.icon}
-                                height={24}
-                                width={24}
-                              />
+                      <SelectContent className="bg-black text-zinc-300 overflow-scroll">
+                        <ScrollArea className="h-[200px]">
+                          {dataExpenseTags?.map((item) => (
+                            <SelectItem
+                              className=""
+                              key={item.id}
+                              value={item.id}
+                            >
+                              <div className="flex justify-between items-center gap-3">
+                                <Image
+                                  alt={item.name}
+                                  src={item.icon}
+                                  height={24}
+                                  width={24}
+                                />
 
-                              {item.name}
-                            </div>
-                          </SelectItem>
-                        ))}
+                                {item.name}
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </ScrollArea>
                       </SelectContent>
                     </Select>
                   </FormControl>

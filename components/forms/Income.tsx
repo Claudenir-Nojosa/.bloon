@@ -40,6 +40,7 @@ import { Calendar } from "../ui/calendar";
 import Loading from "../Loading";
 import { Switch } from "../ui/switch";
 import { Checkbox } from "../ui/checkbox";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface FormIncomeProps {
   isEditing: boolean;
@@ -197,24 +198,26 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                         <SelectValue placeholder={`${defaultValue}`} />
                       </SelectTrigger>
                       <SelectContent className="bg-black text-zinc-300">
-                        {dataIncomeTags?.map((item) => (
-                          <SelectItem
-                            className=""
-                            key={item.id}
-                            value={item.id}
-                          >
-                            <div className="flex justify-between items-center gap-3">
-                              <Image
-                                alt={item.name}
-                                src={item.icon}
-                                height={24}
-                                width={24}
-                              />
+                        <ScrollArea>
+                          {dataIncomeTags?.map((item) => (
+                            <SelectItem
+                              className=""
+                              key={item.id}
+                              value={item.id}
+                            >
+                              <div className="flex justify-between items-center gap-3">
+                                <Image
+                                  alt={item.name}
+                                  src={item.icon}
+                                  height={24}
+                                  width={24}
+                                />
 
-                              {item.name}
-                            </div>
-                          </SelectItem>
-                        ))}
+                                {item.name}
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </ScrollArea>
                       </SelectContent>
                     </Select>
                   </FormControl>
