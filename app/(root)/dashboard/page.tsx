@@ -14,6 +14,8 @@ import "dayjs/locale/pt-br";
 import { Button } from "@/components/ui/button";
 import { ScrollShadow } from "@nextui-org/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface IncomeTagData {
   id: string;
@@ -26,9 +28,13 @@ const Dashboard = () => {
     "Todo o ano"
   );
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
-    // Este código será executado sempre que selectedMonth for atualizado.
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
     console.log(selectedMonth);
   }, [selectedMonth]);
 

@@ -1,6 +1,7 @@
 "use client";
 
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
+import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import {
   Expense as PrismaExpense,
@@ -12,7 +13,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -30,8 +31,18 @@ import { Progress } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Goals = () => {
+
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  });
   const currentMonth = dayjs().locale("pt-br").format("MMMM");
   const capitalizedMonth =
     currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1);
@@ -175,10 +186,6 @@ const Goals = () => {
                 -amountToExpend
               ).format("0.00")} reais`
             : `Falta: R$ ${numeral(amountToExpend).format("0.00")}`;
-        console.log("Selected Month:", selectedMonth);
-        console.log("Combined Data:", combinedData);
-        console.log("Tag ID:", tagId);
-        console.log("Expenses for Month:", expensesForMonth);
         return (
           <div className="flex flex-col mb-10 w-full" key={tag.id}>
             {/* Renderização do componente com os valores atualizados */}

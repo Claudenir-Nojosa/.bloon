@@ -5,8 +5,9 @@ import { ExpenseForm } from "@/components/forms/Expense";
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { FC } from "react";
-
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import React, { FC, useEffect } from "react";
 interface EditExpensePageProps {
   params: {
     id: string;
@@ -14,6 +15,14 @@ interface EditExpensePageProps {
 }
 
 const EditExpensePage: FC<EditExpensePageProps> = ({ params }) => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  });
   const { id } = params;
   const { data: dataExpense, isLoading: isLoadingExpense } = useQuery({
     queryKey: ["expenses", id],

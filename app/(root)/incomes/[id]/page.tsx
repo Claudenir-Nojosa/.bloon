@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import { db } from "@/lib/prismadb";
 import React, { FC } from "react";
 import {
@@ -12,6 +15,8 @@ import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import ButtonAction from "@/components/ButtonAction";
 import { title } from "@/components/shared/primitives";
 import numeral from "numeral";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface TransactionDetailPageProps {
   params: {
@@ -38,7 +43,14 @@ async function getIncome(id: string) {
 
 const IncomeDetailPage: FC<TransactionDetailPageProps> = async ({ params }) => {
   const transaction = await getIncome(params.id);
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  });
   return (
     <MaxWidthWrapper className="flex flex-col justify-center items-center mt-20">
       <Card className="max-w-2xl">

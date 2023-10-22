@@ -1,3 +1,5 @@
+"use client";
+
 import { db } from "@/lib/prismadb";
 import React, { FC } from "react";
 import {
@@ -12,7 +14,9 @@ import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import ButtonAction from "@/components/ButtonAction";
 import numeral from "numeral";
 import { title } from "@/components/shared/primitives";
-
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 interface TransactionDetailPageProps {
   params: {
     id: string;
@@ -36,6 +40,14 @@ async function getExpense(id: string) {
 }
 
 const ExpenseDetail: FC<TransactionDetailPageProps> = async ({ params }) => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  });
   const transaction = await getExpense(params.id);
 
   return (

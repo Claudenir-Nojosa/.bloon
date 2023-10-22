@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Loading from "@/components/Loading";
 import { IncomeForm } from "@/components/forms/Income";
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
@@ -8,6 +9,8 @@ import axios from "axios";
 import React, { FC } from "react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface EditIncomePageProps {
   params: {
@@ -16,6 +19,14 @@ interface EditIncomePageProps {
 }
 
 const EditIncomePage: FC<EditIncomePageProps> = ({ params }) => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  });
   const { id } = params;
   const { data: dataIncome, isLoading: isLoadingIncome } = useQuery({
     queryKey: ["incomes", id],
