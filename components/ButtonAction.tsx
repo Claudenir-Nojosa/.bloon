@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +9,7 @@ import {
 } from "./ui/dropdown-menu";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
 import Loading from "./Loading";
@@ -24,16 +24,19 @@ interface ButtonActionProps {
 }
 
 const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const { mutate: deleteExpense, isLoading: isLoadingExpenseDelete } =
     useMutation({
       mutationFn: async () => {
-        return axios.delete(`/api/expenses/${id}`);
+        const response = await axios.delete(`/api/expenses/${id}`);
+        return response.data;
       },
       onSuccess: (data) => {
         // Faça o redirecionamento após o delete bem-sucedido
+        queryClient.invalidateQueries(["combinedData"]);
         toast.success("Despesa deletada com sucesso!");
-        router.push("/");
+        router.push("/dashboard");
         router.refresh();
       },
       onError: (data) => {
@@ -47,8 +50,9 @@ const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
       },
       onSuccess: (data) => {
         // Faça o redirecionamento após o delete bem-sucedido
+        queryClient.invalidateQueries(["combinedData"]);
         toast.success("Receita deletada com sucesso!");
-        router.push("/");
+        router.push("/dashboard");
         router.refresh();
       },
       onError: (data) => {
@@ -63,7 +67,7 @@ const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
     },
   });
   console.log(dataExpense);
-  const { data: dataIncome, isLoading: isLoadingIncome} = useQuery({
+  const { data: dataIncome, isLoading: isLoadingIncome } = useQuery({
     queryKey: ["incomes", id],
     queryFn: async () => {
       const response = await axios.get(`/api/incomes/${id}`);
@@ -85,7 +89,8 @@ const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
         return newPaidState;
       },
       onSuccess: (data) => {
-        toast.success("Despesa com situação atualizada!");
+        queryClient.invalidateQueries(["combinedData"]);
+        toast.success("Despesa com situação de pagamento atualizada!");
         router.push("/dashboard");
         router.refresh();
       },
@@ -95,7 +100,7 @@ const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
         );
       },
     });
-    const { mutate: toggleIncomePaid, isLoading: isLoadingIncomeEdit } =
+  const { mutate: toggleIncomePaid, isLoading: isLoadingIncomeEdit } =
     useMutation({
       mutationFn: async () => {
         const response = await axios.get(`/api/incomes/${id}`);
@@ -108,16 +113,18 @@ const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
         return newPaidState;
       },
       onSuccess: (data) => {
-        toast.success("Receita com situação atualizada!");
+        queryClient.invalidateQueries(["combinedData"]);
+        toast.success("Receita com situação de pagamento atualizada!");
         router.push("/dashboard");
         router.refresh();
       },
       onError: (data) => {
         toast.error(
-          "Aconteceu um erro ao atualizar a receita, tente novamente"
+          "Aconteceu um erro ao atualizar o pagamento da receita, tente novamente"
         );
       },
     });
+
   return (
     <div className="flex gap-2">
       <Button

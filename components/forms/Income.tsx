@@ -90,7 +90,7 @@ export const IncomeForm: FC<FormIncomeProps> = ({
     },
     onSuccess: (data) => {
       toast.success("Receita criada com sucesso!");
-      router.push("/");
+      router.push("/dashboard");
       router.refresh();
     },
     onError: (data) => {

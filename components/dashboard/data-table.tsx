@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Transactions } from "@/app/(root)/dashboard/columns";
 import { DataTablePagination } from "./data-table-pagination";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { format, parse } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useQuery } from "@tanstack/react-query";
@@ -216,6 +216,11 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className={
+                    (data[row.index] as Transactions).incomeTagId
+                      ? "text-green-400"
+                      : "text-red-400"
+                  }
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

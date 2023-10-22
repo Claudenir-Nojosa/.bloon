@@ -92,7 +92,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
     },
     onSuccess: (data) => {
       toast.success("Despesa criada com sucesso!");
-      router.push("/");
+      router.push("/dashboard");
       router.refresh();
     },
     onError: (data) => {
