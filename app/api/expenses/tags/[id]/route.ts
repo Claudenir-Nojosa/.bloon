@@ -19,7 +19,7 @@ export async function PATCH(req: Request, context: contextProps) {
       },
     });
     return NextResponse.json(
-      { message: "ExpenseTag Setted Limit Successfully" },
+      { message: "ExpenseTag changed Limit Successfully" },
       { status: 200 }
     );
   } catch (error) {
