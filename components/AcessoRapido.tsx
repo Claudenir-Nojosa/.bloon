@@ -15,7 +15,7 @@ import Link from "next/link";
 
 const AcessoRapido = () => {
   return (
-    <Card className=" dark:border-purple-950 dark:bg-gradient-to-r from-purple-900 via-purple-950 to-black">
+    <Card>
       <CardHeader className="text-start">
         <h2 className="font-semibold mb-8 text-2xl">Acesso rápido</h2>
       </CardHeader>
@@ -25,7 +25,12 @@ const AcessoRapido = () => {
             <Badge variant="outline" className="flex flex-col items-center">
               <Link href="/create/expense">
                 <Button size="icon" variant="ghost">
-                  <MinusCircle />
+                  <Image
+                    src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/despesa.png?raw=true"
+                    alt="Adicionar Despesa"
+                    width={30}
+                    height={30}
+                  />
                 </Button>
                 <span>Adicionar despesa</span>
               </Link>
@@ -35,7 +40,12 @@ const AcessoRapido = () => {
             <Badge variant="outline" className="flex flex-col items-center">
               <Link href="/create/income">
                 <Button size="icon" variant="ghost">
-                  <PlusCircle />
+                <Image
+                    src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/receita.png?raw=true"
+                    alt="Adicionar Receita"
+                    width={30}
+                    height={30}
+                  />
                 </Button>
                 <span>Adicionar receita</span>
               </Link>
@@ -45,7 +55,12 @@ const AcessoRapido = () => {
             <Badge variant="outline" className="flex flex-col items-center">
               <Link href="/goals">
                 <Button size="icon" variant="ghost">
-                  <GoalIcon />
+                <Image
+                    src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/metas.png?raw=true"
+                    alt="Metas de gastos"
+                    width={30}
+                    height={30}
+                  />
                 </Button>
                 <span>Consultar metas</span>
               </Link>

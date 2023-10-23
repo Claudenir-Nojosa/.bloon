@@ -16,6 +16,7 @@ import { ScrollShadow } from "@nextui-org/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { title } from "@/components/shared/primitives";
 
 interface IncomeTagData {
   id: string;
@@ -147,7 +148,7 @@ const Dashboard = () => {
   return (
     <MaxWidthWrapper className="max-w-2xl mt-20 sm:mb-12 mb-40 sm:mt-15 flex flex-col items-center justify-center text-center">
       <h1
-        className="text-5xl mb-5 font-bold cursor-pointer"
+        className={`text-5xl mb-5 font-bold cursor-pointer ${title({ color: "green" })}`}
         onClick={() => {
           setSelectedMonth("Todo o ano");
           setSelectedYear(null);
@@ -168,7 +169,7 @@ const Dashboard = () => {
               }}
               className={
                 selectedYear === year
-                  ? "bg-[#9633d9] text-white border-black"
+                  ? "bg-[#0d825993] text-white border-black"
                   : ""
               }
             >

@@ -135,8 +135,8 @@ export const IncomeForm: FC<FormIncomeProps> = ({
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader className="flex flex-col text-lg dark:text-zinc-300 justify-center items-center text-center">
             <Image
-              src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/incomesIcon.png?raw=true"
-              alt="Income Image"
+              src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/receita.png?raw=true"
+              alt="Receita"
               height={60}
               width={60}
               className="m-6"

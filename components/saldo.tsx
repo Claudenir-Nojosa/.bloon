@@ -118,10 +118,9 @@ const Saldo = () => {
         <div className="flex items-center w-full">
           <p className="text-4xl">
             Olá,{" "}
-            <span className={textTitle({ color: "violet", size: "sm" })}>
+            <span className={textTitle({ color: "green", size: "sm" })}>
               {session?.user?.name}
             </span>
-            <span> 🪙</span>
           </p>
         </div>
       </CardHeader>
@@ -178,10 +177,15 @@ const Saldo = () => {
         </div>
         <div className="flex items-end">
           <Button
-            className="mt-10 rounded-md gap-2 border bg-transparent border-purple-900"
+            className="mt-10 rounded-md gap-2 border bg-transparent border-[#0d825913]"
             variant="outline"
           >
-            <Wallet />
+            <Image
+              src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/carteira.png?raw=true"
+              alt="Carteira"
+              width={30}
+              height={30}
+            />
             <Link href="/dashboard">Verificar carteira!</Link>
           </Button>
         </div>

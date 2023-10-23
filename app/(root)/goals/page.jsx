@@ -32,9 +32,9 @@ import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { title } from "@/components/shared/primitives";
 
 const Goals = () => {
-
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -146,7 +146,13 @@ const Goals = () => {
 
   return (
     <MaxWidthWrapper className="flex flex-col gap-7 mt-14 mb-14 justify-start text-start items-start">
-      <h1 className="text-5xl font-bold">Limites de despesas</h1>
+      <h1
+        className={`text-5xl font-bold cursor-pointer ${title({
+          color: "green",
+        })}`}
+      >
+        Limites de despesas
+      </h1>
       <p className="text-zinc-400 mb-14">
         Para editar os limites, basta clicar no ícone da categoria
       </p>
@@ -171,10 +177,9 @@ const Goals = () => {
         );
 
         // Calcular progresso e falta com base no mês selecionado
-        const progressValue =
-          expensesForMonth.length > 0
-            ? calculateProgressValue(tagId, expensesForMonth)
-            : 0;
+        const progressValue = expensesForMonth.length > 0 && tag.monthlyLimit > 0
+  ? calculateProgressValue(tagId, expensesForMonth)
+  : 0;
 
         const monthlyLimit = tag.monthlyLimit || 0;
         const totalExpenseValue = (progressValue / 100) * monthlyLimit;

@@ -130,7 +130,7 @@ const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
       <Button
         size="icon"
         variant="outline"
-        className="cursor-pointer hover:text-[#9633d9]"
+        className="cursor-pointer hover:text-[#0d825993]"
       >
         {isIncome ? (
           <Link href={`/incomes/edit/${id}`}>
@@ -146,7 +146,7 @@ const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
         <Button
           size="icon"
           variant="outline"
-          className="cursor-pointer hover:text-[#9633d9]"
+          className="cursor-pointer hover:text-[#0d825993]"
           onClick={() => deleteIncome()}
         >
           {isLoadingIncomeDelete ? <Loading /> : <Trash />}
@@ -155,7 +155,7 @@ const ButtonAction: FC<ButtonActionProps> = ({ isIncome, id }) => {
         <Button
           size="icon"
           variant="outline"
-          className="cursor-pointer hover:text-[#9633d9]"
+          className="cursor-pointer hover:text-[#0d825993]"
           onClick={() => deleteExpense()}
         >
           {isLoadingExpenseDelete ? <Loading /> : <Trash />}

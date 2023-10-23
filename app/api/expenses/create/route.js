@@ -12,6 +12,7 @@ export async function POST(req) {
         description: body.description,
         value: body.value,
         date: body.date,
+        paid: body.paid,
         User: {
           connect: {
             id: session.user.id,

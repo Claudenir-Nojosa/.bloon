@@ -33,7 +33,7 @@ const page = async () => {
               Aplicação{" "}
               <span
                 className={`max-w-3xl text-[3.1rem] font-bold md:text-6xl lg:text-7xl ${textTitle(
-                  { color: "violet" }
+                  { color: "green" }
                 )}`}
               >
                 financeira
@@ -113,7 +113,7 @@ const page = async () => {
                   Tenha seu{" "}
                   <span
                     className={`text-4xl sm:text-5xl max-w-4xl font-bold md:text-6xl lg:text-7xl ${textTitle(
-                      { color: "violet" }
+                      { color: "green" }
                     )}`}
                   >
                     controle financeiro{" "}
@@ -134,7 +134,7 @@ const page = async () => {
             <ol className="my-8 space-y-4 pt-8 md:flex md:space-x-12 md:space-y-0">
               <li className="md:flex-1">
                 <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-                  <span className={textTitle({ color: "violet" })}>
+                  <span className={textTitle({ color: "green" })}>
                     1° Passo
                   </span>
                   <span className="text-xl font-semibold">Crie uma conta.</span>
@@ -152,7 +152,7 @@ const page = async () => {
               </li>
               <li className="md:flex-1">
                 <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-                  <span className={textTitle({ color: "violet" })}>
+                  <span className={textTitle({ color: "green" })}>
                     2° Passo
                   </span>
                   <span className="text-xl font-semibold">
@@ -165,7 +165,7 @@ const page = async () => {
               </li>
               <li className="md:flex-1">
                 <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-                  <span className={textTitle({ color: "violet" })}>
+                  <span className={textTitle({ color: "green" })}>
                     3° Passo
                   </span>
                   <span className="text-xl font-semibold">

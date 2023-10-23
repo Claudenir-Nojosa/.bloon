@@ -110,7 +110,7 @@ const Budget = () => {
               >
                 {showData ? <Eye /> : <EyeOff />}
               </Button>
-              <div className="flex flex-col text-start mt-5">
+              <div className="flex flex-col text-start mt-5 text-lg font-semibold">
                 <p className={`${colorClass}`}>
                   Saldo Geral{" "}
                   {showData ? <span>R$ {formattedDifference}</span> : "--"}

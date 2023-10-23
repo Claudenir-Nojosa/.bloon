@@ -139,8 +139,8 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader className="flex flex-col text-lg  dark:text-zinc-300 justify-center items-center text-center">
             <Image
-              src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/expensesIcon.png?raw=true"
-              alt="Expense Image"
+              src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/despesa.png?raw=true"
+              alt="Despesa"
               height={60}
               width={60}
               className="m-6"

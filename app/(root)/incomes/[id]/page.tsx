@@ -56,7 +56,7 @@ const IncomeDetailPage: FC<TransactionDetailPageProps> = async ({ params }) => {
       <Card className="max-w-2xl">
         <CardHeader>
           <CardTitle className="flex">
-            <h2 className={title({ color: "violet", size: "sm" })}>
+            <h2 className={title({ color: "green", size: "sm" })}>
               Descrição da Receita:{" "}
               <span className="text-foreground">
                 {transaction?.description}

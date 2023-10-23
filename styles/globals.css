@@ -67,7 +67,7 @@
 }
 @layer components {
   .bottombar {
-    @apply fixed bottom-0 z-10 w-full rounded-t-3xl p-4 backdrop-blur border-[#9633d9] border-t-2 md:hidden;
+    @apply fixed bottom-0 z-10 w-full rounded-t-3xl p-4 backdrop-blur  border-[#0d825913] border-t-2 md:hidden;
   }
 
   .bottombar_container {
