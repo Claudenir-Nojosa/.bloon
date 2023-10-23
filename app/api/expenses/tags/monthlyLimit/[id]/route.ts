@@ -12,12 +12,24 @@ export async function PATCH(req: Request, context: contextProps) {
   try {
     const { params } = context;
     const body = await req.json();
-    await db.expenseTag.update({
-      where: { id: params.id },
+    const userMonthlyLimit = await db.userMonthlyLimit.findFirst({
+      where: { expenseTagId: params.id },
+    });
+
+    if (!userMonthlyLimit) {
+      return NextResponse.json(
+        { message: "Registro não encontrado" },
+        { status: 404 }
+      );
+    }
+
+    await db.userMonthlyLimit.update({
+      where: { id: userMonthlyLimit.id },
       data: {
         monthlyLimit: body.monthlyLimit,
       },
     });
+
     return NextResponse.json(
       { message: "ExpenseTag Setted Limit Successfully" },
       { status: 200 }
@@ -37,12 +49,12 @@ export async function GET(req: Request, context: contextProps) {
 
   try {
     const { params } = context;
-    const expenseTag = await db.expenseTag.findFirst({
+    const userMonthlyLimit = await db.userMonthlyLimit.findFirst({
       where: {
-        id: params.id,
+        expenseTagId: params.id,
       },
     });
-    return NextResponse.json(expenseTag, { status: 200 });
+    return NextResponse.json(userMonthlyLimit, { status: 200 });
   } catch (error) {
     if (error) console.log(error);
     return NextResponse.json(

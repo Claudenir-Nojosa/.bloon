@@ -17,10 +17,11 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 
-  accounts Account[]
-  Session  Session[]
-  Income   Income[]
-  Expense  Expense[]
+  accounts         Account[]
+  Session          Session[]
+  Income           Income[]
+  Expense          Expense[]
+  userMonthlyLimit UserMonthlyLimit[]
 }
 
 model Account {
@@ -87,9 +88,19 @@ model Expense {
 }
 
 model ExpenseTag {
-  id           String    @id @default(auto()) @map("_id") @db.ObjectId
-  name         String
-  icon         String
-  monthlyLimit Float?
-  Expense      Expense[]
+  id               String             @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  icon             String
+  monthlyLimit     Float?
+  Expense          Expense[]
+  UserMonthlyLimit UserMonthlyLimit[]
+}
+
+model UserMonthlyLimit {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  monthlyLimit Float
+  expenseTagId String     @db.ObjectId
+  userId       String     @db.ObjectId
+  User         User       @relation(fields: [userId], references: [id])
+  ExpenseTag   ExpenseTag @relation(fields: [expenseTagId], references: [id])
 }

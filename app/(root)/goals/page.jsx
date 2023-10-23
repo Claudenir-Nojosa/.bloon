@@ -56,6 +56,20 @@ const Goals = () => {
     },
   });
   console.log(dataExpenseTags);
+
+  // fetch expense tags
+  const {
+    data: dataExpenseTagsMonthlyLimit,
+    isLoading: isLoadingExpenseTagsMonthlyLimit,
+  } = useQuery({
+    queryKey: ["expenseTagsLimits"],
+    queryFn: async () => {
+      const response = await axios.get("/api/expenses/tags/monthlyLimit");
+      return response.data;
+    },
+  });
+  console.log(dataExpenseTagsMonthlyLimit);
+
   //Fetch Expenses values
   const { data: dataExpense, isLoading: isLoadingExpense } = useQuery({
     queryKey: ["expenses"],
@@ -143,7 +157,18 @@ const Goals = () => {
       setSelectedMonth(months[0]);
     }
   };
-
+  const combinedTags = dataExpenseTags?.map((generalTag) => {
+    const userTag = dataExpenseTagsMonthlyLimit
+      ? dataExpenseTagsMonthlyLimit.find(
+          (userTag) => userTag.ExpenseTag.id === generalTag.id
+        )
+      : null;
+    const monthlyLimit = userTag ? userTag.monthlyLimit : 0;
+    return {
+      ...generalTag,
+      monthlyLimit,
+    };
+  });
   return (
     <MaxWidthWrapper className="flex flex-col gap-7 mt-14 mb-14 justify-start text-start items-start">
       <h1
@@ -167,7 +192,7 @@ const Goals = () => {
           <ChevronRight />
         </button>
       </div>
-      {dataExpenseTags?.map((tag) => {
+      {combinedTags?.map((tag) => {
         const tagId = tag.id;
 
         // Filtrar as despesas do mês selecionado
@@ -177,9 +202,10 @@ const Goals = () => {
         );
 
         // Calcular progresso e falta com base no mês selecionado
-        const progressValue = expensesForMonth.length > 0 && tag.monthlyLimit > 0
-  ? calculateProgressValue(tagId, expensesForMonth)
-  : 0;
+        const progressValue =
+          expensesForMonth.length > 0 && tag.monthlyLimit > 0
+            ? calculateProgressValue(tagId, expensesForMonth)
+            : 0;
 
         const monthlyLimit = tag.monthlyLimit || 0;
         const totalExpenseValue = (progressValue / 100) * monthlyLimit;

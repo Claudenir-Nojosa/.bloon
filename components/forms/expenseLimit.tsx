@@ -46,7 +46,7 @@ export const ExpenseLimitForm: FC<ExpenseLimitFormProps> = ({ data }) => {
   } = useMutation<ExpenseTag, unknown, z.infer<typeof ExpenseTagSchema>>({
     mutationFn: async (newExpenseEditData) => {
       const response = await axios.patch(
-        `/api/expenses/tags/${data.id}`,
+        `/api/expenses/tags/monthlyLimit/${data.id}`,
         newExpenseEditData
       );
       return response.data;
