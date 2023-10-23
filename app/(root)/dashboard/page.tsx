@@ -17,6 +17,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { title } from "@/components/shared/primitives";
+import Loading from "@/components/Loading";
 
 interface IncomeTagData {
   id: string;
@@ -145,10 +146,20 @@ const Dashboard = () => {
   };
 
   const currentMonth = dayjs().format("MMMM");
+
+  if (isLoadingTransactions) {
+    return (
+      <MaxWidthWrapper className="flex justify-center items-center h-screen">
+        <Loading />
+      </MaxWidthWrapper>
+    );
+  }
   return (
     <MaxWidthWrapper className="max-w-2xl mt-20 sm:mb-12 mb-40 sm:mt-15 flex flex-col items-center justify-center text-center">
       <h1
-        className={`text-5xl mb-5 font-bold cursor-pointer ${title({ color: "green" })}`}
+        className={`text-5xl mb-5 font-bold cursor-pointer ${title({
+          color: "green",
+        })}`}
         onClick={() => {
           setSelectedMonth("Todo o ano");
           setSelectedYear(null);

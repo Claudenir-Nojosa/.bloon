@@ -114,8 +114,8 @@ export function DataTable<TData, TValue>({
           <Image
             src={incomeTag.icon}
             alt={incomeTag.name}
-            width={24}
-            height={24}
+            width={40}
+            height={40}
           />
           <span>{incomeTag.name}</span>
         </div>
@@ -134,8 +134,8 @@ export function DataTable<TData, TValue>({
           <Image
             src={expenseTag.icon}
             alt={expenseTag.name}
-            width={24}
-            height={24}
+            width={40}
+            height={40}
           />
           <span>{expenseTag.name}</span>
         </div>
@@ -147,7 +147,7 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       {/* Tabela */}
-      <div className="flex items-center py-4">
+      <div className="flex items-center  py-4">
         <Input
           placeholder="Filtrar transações..."
           value={
@@ -191,13 +191,13 @@ export function DataTable<TData, TValue>({
         </DropdownMenu>
       </div>
       <div className="rounded-md border mb-4">
-        <Table>
+        <Table >
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="px-10">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -223,7 +223,7 @@ export function DataTable<TData, TValue>({
                   }
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="px-10">
                       {flexRender(
                         cell.column.id === "tipo" ? (
                           (data[row.index] as Transactions).incomeTagId ? (
@@ -260,8 +260,8 @@ export function DataTable<TData, TValue>({
                               <Image
                                 alt="Pago"
                                 src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/paid.png?raw=true"
-                                width={30}
-                                height={30}
+                                width={40}
+                                height={40}
                               />
                             </div>
                           ) : (
@@ -269,8 +269,8 @@ export function DataTable<TData, TValue>({
                               <Image
                                 alt="Pago"
                                 src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/unpaid.png?raw=true"
-                                width={30}
-                                height={30}
+                                width={40}
+                                height={40}
                               />
                             </div>
                           )
