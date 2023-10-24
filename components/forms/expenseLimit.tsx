@@ -41,27 +41,27 @@ export const ExpenseLimitForm: FC<ExpenseLimitFormProps> = ({ data }) => {
   const router = useRouter();
 
   const {
-    mutate: editExpenseTagLimit,
-    isLoading: isLoadingEditExpenseTagLimit,
+    mutate: createExpenseTagLimit,
+    isLoading: isLoadingCreateExpenseTagLimit,
   } = useMutation<ExpenseTag, unknown, z.infer<typeof ExpenseTagSchema>>({
     mutationFn: async (newExpenseEditData) => {
-      const response = await axios.patch(
+      const response = await axios.post(
         `/api/expenses/tags/monthlyLimit/${data.id}`,
         newExpenseEditData
       );
       return response.data;
     },
     onSuccess: (data) => {
-      toast.success("Limite editado com sucesso!");
+      toast.success("Limite inserido com sucesso!");
       router.push("/dashboard");
       router.refresh();
     },
     onError: (data) => {
-      toast.error("Aconteceu um erro ao editar o limite, tente novamente");
+      toast.error("Aconteceu um erro ao inserir o limite, tente novamente");
     },
   });
   function onSubmit(data: z.infer<typeof ExpenseTagSchema>) {
-    editExpenseTagLimit(data);
+    createExpenseTagLimit(data);
   }
 
   return (
@@ -96,7 +96,7 @@ export const ExpenseLimitForm: FC<ExpenseLimitFormProps> = ({ data }) => {
                 <Link href="/">Cancelar</Link>
               </Button>
               <Button variant="outline" type="submit">
-                {isLoadingEditExpenseTagLimit ? <Loading /> : "Salvar Limite"}
+                {isLoadingCreateExpenseTagLimit ? <Loading /> : "Salvar Limite"}
               </Button>
             </div>
           </CardBody>

@@ -7,7 +7,50 @@ interface contextProps {
     id: string;
   };
 }
+export async function POST(req: Request, context: contextProps) {
+  try {
+    const { params } = context;
+    const body = await req.json();
+    const session = await auth();
+    if (!session) return new Response("No session found", { status: 401 });
 
+    const userId = session.user.id as string;
+
+    const existingRecord = await db.userMonthlyLimit.findFirst({
+      where: { expenseTagId: params.id },
+    });
+
+    if (existingRecord) {
+      await db.userMonthlyLimit.update({
+        where: { id: existingRecord.id },
+        data: {
+          monthlyLimit: body.monthlyLimit,
+        },
+      });
+
+      return NextResponse.json(
+        { message: "Limite atualizado com sucesso" },
+        { status: 200 }
+      );
+    } else {
+      const monthlyLimit = await db.userMonthlyLimit.create({
+        data: {
+          userId: userId,
+          expenseTagId: params.id,
+          monthlyLimit: body.monthlyLimit,
+        },
+      });
+
+      return NextResponse.json(monthlyLimit, { status: 200 });
+    }
+  } catch (error) {
+    console.log("erro:", error);
+    return NextResponse.json(
+      { message: "Não foi possível definir o limite da despesa" },
+      { status: 500 }
+    );
+  }
+}
 export async function PATCH(req: Request, context: contextProps) {
   try {
     const { params } = context;

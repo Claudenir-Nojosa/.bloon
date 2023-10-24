@@ -168,8 +168,11 @@ const Goals = () => {
       0
     );
     const tag = combinedTags[0];
+    console.log(tag)
     const monthlyLimit = tag.monthlyLimit || 0;
     const progressValue = (totalExpenseValue / monthlyLimit) * 100;
+    console.log(totalExpenseValue)
+    console.log(monthlyLimit)
     return progressValue;
   };
   return (
