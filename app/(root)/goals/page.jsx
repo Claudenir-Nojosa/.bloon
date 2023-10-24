@@ -105,7 +105,6 @@ const Goals = () => {
     }
   };
 
-  
   const months = [
     "Janeiro",
     "Fevereiro",
@@ -167,12 +166,12 @@ const Goals = () => {
       (total, expense) => total + expense.value,
       0
     );
-    const tag = combinedTags[0];
-    console.log(tag)
+    const tag = combinedTags.find((t) => t.id === tagId);
+    console.log(tag);
     const monthlyLimit = tag.monthlyLimit || 0;
     const progressValue = (totalExpenseValue / monthlyLimit) * 100;
-    console.log(totalExpenseValue)
-    console.log(monthlyLimit)
+    console.log(totalExpenseValue);
+    console.log(monthlyLimit);
     return progressValue;
   };
   return (
@@ -216,15 +215,14 @@ const Goals = () => {
         const monthlyLimit = tag.monthlyLimit || 0;
         const totalExpenseValue = (progressValue / 100) * monthlyLimit;
         const amountToExpend = monthlyLimit - totalExpenseValue;
-        console.log(monthlyLimit);
-        console.log(amountToExpend);
-
+        console.log(totalExpenseValue);
         const faltaTexto =
           progressValue >= 100
             ? `Você já atingiu o limite e passou por R$ ${numeral(
                 -amountToExpend
               ).format("0.00")} reais`
             : `Falta: R$ ${numeral(amountToExpend).format("0.00")}`;
+
         return (
           <div className="flex flex-col mb-10 w-full" key={tag.id}>
             {/* Renderização do componente com os valores atualizados */}

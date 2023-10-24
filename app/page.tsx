@@ -145,7 +145,7 @@ const page = async () => {
             </div>
           </div>
           {/* Seção das metas */}
-          <div className="mx-auto  max-w-5xl sm:mt-56">
+          <div className="mx-auto mt--10 max-w-5xl sm:mt-56">
             <div className="mb-12 px-6 lg:px-8">
               <div className="mx-auto max-w-2xl sm:text-center">
                 <h2
