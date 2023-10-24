@@ -296,7 +296,7 @@ export const IncomeForm: FC<FormIncomeProps> = ({
                   name="paid"
                   render={({ field }) => (
                     <FormItem className="flex items-center text-end w-2/3 space-x-1 flex-row space-y-0 rounded-md justify-start">
-                      <FormLabel className="font-medium text-zinc-300 px-2">
+                      <FormLabel className="text-xs sm:text-small font-medium text-zinc-300 sm:px-2">
                         Está pago ?
                       </FormLabel>
 

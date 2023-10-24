@@ -155,7 +155,7 @@ const Dashboard = () => {
     );
   }
   return (
-    <MaxWidthWrapper className="max-w-2xl mt-20 sm:mb-12 mb-40 sm:mt-15 flex flex-col items-center justify-center text-center">
+    <MaxWidthWrapper className="max-w-2xl mt-20 md:mb-12 mb-40 sm:mt-15 flex flex-col items-center justify-center text-center">
       <h1
         className={`text-5xl mb-5 font-bold cursor-pointer ${title({
           color: "green",
@@ -205,7 +205,9 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
-      <DataTable columns={columns} data={filteredTransactions || []} />
+      <div className="w-[20rem] sm:w-[40rem] md:w-[50rem] lg:w-[60rem] xl:w-max">
+        <DataTable columns={columns} data={filteredTransactions || []} />
+      </div>
     </MaxWidthWrapper>
   );
 };

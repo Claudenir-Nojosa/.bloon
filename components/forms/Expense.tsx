@@ -138,7 +138,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
     <>
       <div className="flex items-center justify-center">
         <h1
-          className={`text-5xl font-bold cursor-pointer ${title({
+          className={`text-5xl font-bold cursor-pointer pb-2 ${title({
             color: "green",
             size: "sm",
           })}`}
@@ -146,7 +146,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
           Incluir Despesa
         </h1>
       </div>
-      <Card className="border rounded-2xl p-2 pb-2 mt-6 min-w-[20rem] dark:border-[#2b926e8d] dark:bg-[#21362e39]">
+      <Card className="border rounded-2xl p-2 pb-2 mt-5 min-w-[20rem] dark:border-[#2b926e8d] dark:bg-[#21362e39]">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <CardHeader className="flex flex-col text-lg  dark:text-zinc-300 justify-center items-center text-center">
@@ -300,7 +300,7 @@ export const ExpenseForm: FC<FormExpenseProps> = ({
                   name="paid"
                   render={({ field }) => (
                     <FormItem className="flex items-center text-end w-2/3 space-x-1 flex-row space-y-0 rounded-md justify-start">
-                      <FormLabel className="font-medium text-zinc-300 px-2">
+                      <FormLabel className="text-xs sm:text-small font-medium text-zinc-300 sm:px-2">
                         Está pago ?
                       </FormLabel>
                       <FormControl>

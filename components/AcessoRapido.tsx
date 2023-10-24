@@ -17,10 +17,10 @@ const AcessoRapido = () => {
   return (
     <Card>
       <CardHeader className="text-start">
-        <h2 className="font-semibold mb-8 text-2xl">Acesso rápido</h2>
+        <h2 className="font-semibold mb-8 text-2xl md:text-start text-center">Acesso rápido</h2>
       </CardHeader>
       <CardContent>
-        <div className="w-full flex justify-between gap-20">
+        <div className="w-full md:flex-row flex-col flex md:justify-between gap-6 md:gap-20">
           <div>
             <Badge variant="outline" className="flex flex-col items-center">
               <Link href="/create/expense">

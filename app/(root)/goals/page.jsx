@@ -47,6 +47,7 @@ const Goals = () => {
   const capitalizedMonth =
     currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1);
   const [selectedMonth, setSelectedMonth] = useState(capitalizedMonth);
+
   // fetch expense tags
   const { data: dataExpenseTags, isLoading: isLoadingExpenseTags } = useQuery({
     queryKey: ["expenseTags"],
@@ -57,7 +58,6 @@ const Goals = () => {
   });
   console.log(dataExpenseTags);
 
-  // fetch expense tags
   const {
     data: dataExpenseTagsMonthlyLimit,
     isLoading: isLoadingExpenseTagsMonthlyLimit,
@@ -104,25 +104,8 @@ const Goals = () => {
       return [];
     }
   };
-  const calculateProgressValue = (tagId, expenses) => {
-    const paidExpenses = expenses.filter((expense) => expense.paid);
 
-    const expensesWithSameTag = paidExpenses.filter(
-      (expense) => expense.expenseTagId === tagId
-    );
-    if (expensesWithSameTag.length === 0) {
-      return 0;
-    }
-    const totalExpenseValue = expensesWithSameTag.reduce(
-      (total, expense) => total + expense.value,
-      0
-    );
-    console.log(calculateProgressValue);
-    const tag = expensesWithSameTag[0].ExpenseTag;
-    const monthlyLimit = tag.monthlyLimit || 0;
-    const progressValue = (totalExpenseValue / monthlyLimit) * 100;
-    return progressValue;
-  };
+  
   const months = [
     "Janeiro",
     "Fevereiro",
@@ -169,6 +152,26 @@ const Goals = () => {
       monthlyLimit,
     };
   });
+  console.log(combinedTags);
+
+  const calculateProgressValue = (tagId, expenses) => {
+    const paidExpenses = expenses.filter((expense) => expense.paid);
+
+    const expensesWithSameTag = paidExpenses.filter(
+      (expense) => expense.expenseTagId === tagId
+    );
+    if (expensesWithSameTag.length === 0) {
+      return 0;
+    }
+    const totalExpenseValue = expensesWithSameTag.reduce(
+      (total, expense) => total + expense.value,
+      0
+    );
+    const tag = combinedTags[0];
+    const monthlyLimit = tag.monthlyLimit || 0;
+    const progressValue = (totalExpenseValue / monthlyLimit) * 100;
+    return progressValue;
+  };
   return (
     <MaxWidthWrapper className="flex flex-col gap-7 mt-14 mb-14 justify-start text-start items-start">
       <h1
@@ -210,6 +213,8 @@ const Goals = () => {
         const monthlyLimit = tag.monthlyLimit || 0;
         const totalExpenseValue = (progressValue / 100) * monthlyLimit;
         const amountToExpend = monthlyLimit - totalExpenseValue;
+        console.log(monthlyLimit);
+        console.log(amountToExpend);
 
         const faltaTexto =
           progressValue >= 100

@@ -132,7 +132,7 @@ const Budget = () => {
                   )}
                 </p>
               </div>
-              <div className="w-2/3 mt-24">
+              <div className="lg:w-2/3 w-[50%]  mt-10 md:mt-24">
                 <Doughnut data={data} options={options} />
               </div>
             </>
