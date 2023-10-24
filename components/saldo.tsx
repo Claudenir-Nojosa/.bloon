@@ -131,7 +131,7 @@ const Saldo = () => {
             ""
           ) : (
             <div>
-              <div className="flex gap-5 items-center">
+              <div className="flex gap-3 md:gap-5 items-center">
                 <Image
                   className="rounded-full"
                   src={session?.user?.image || ""}

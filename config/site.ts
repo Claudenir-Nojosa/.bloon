@@ -58,27 +58,27 @@ export const siteNavConfigWithSession = {
   ],
   navMenuItems: [
     {
-      imgURL: "/assets/income.svg",
+      imgURL: "https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/receita.png?raw=true",
       label: "Receita",
       href: "/create/income",
     },
     {
-      imgURL: "/assets/expense.svg",
+      imgURL: "https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/despesa.png?raw=true",
       label: "Despesa",
       href: "/create/expense",
     },
     {
-      imgURL: "/assets/home.svg",
+      imgURL: "https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/home.png?raw=true",
       label: "Início",
       href: "/",
     },
     {
-      imgURL: "/assets/goal.svg",
+      imgURL: "https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/metas.png?raw=true",
       label: "Metas",
       href: "/goals",
     },
     {
-      imgURL: "/assets/logout.svg",
+      imgURL: "https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/logout.png?raw=true",
       label: "Sair",
       href: "/login",
     },

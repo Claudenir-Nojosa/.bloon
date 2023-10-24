@@ -46,7 +46,7 @@ function BottomBar() {
               href={link.href}
               key={link.label}
               className={`bottombar_link ${
-                isActive && "bg-[#d627d0] bg-opacity-50"
+                isActive && "bg-[#17f7a929] bg-opacity-50"
               }`}
             >
               <Image
