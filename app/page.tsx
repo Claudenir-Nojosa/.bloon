@@ -102,41 +102,40 @@ const page = async () => {
             </div>
           </div>
           {/* Seção do dashboard */}
-          <div className="mx-auto mt-10 max-w-5xl sm:mt-56">
-            <div className="mb-12 px-6 lg:px-8">
-              <div className="mx-auto max-w-2xl sm:text-center">
-                <h2
-                  className={`text-4xl sm:text-5xl max-w-4xl font-bold md:text-6xl lg:text-7xl ${textTitle()}`}
-                >
-                  Acompanhamento{" "}
-                  <span
-                    className={`text-4xl sm:text-5xl max-w-4xl font-bold md:text-6xl lg:text-7xl ${textTitle(
-                      { color: "green" }
-                    )}`}
-                  >
-                    intuitivo.
-                  </span>
-                </h2>
-                <p className="mt-4 text-lg">
-                  Tenha em mãos um dashboard completo onde há a possibilidade de
-                  filtro e sorteamento dos dados.
-                </p>
-              </div>
-              <div>
-                <div className="relative isolate">
-                  <div>
-                    <div className="mx-auto max-w-6xl px-6 lg:px-8">
-                      <div className="mt-16 flow-root sm:mt-24">
-                        <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-                          <Image
-                            src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/dashboard.png?raw=true"
-                            alt="bloon preview"
-                            width={1364}
-                            height={866}
-                            quality={100}
-                            className="rounded-md bg-white p-2 sm:p-8 md:p-[0.7px] shadow-2xl ring-1 ring-gray-900/10"
-                          />
-                        </div>
+          <div className=" mt-40 px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl sm:text-center">
+              <h2
+                className={`text-4xl sm:text-5xl max-w-4xl font-bold md:text-6xl lg:text-7xl ${textTitle(
+                  { color: "green" }
+                )}`}
+              >
+                Visão Intuitiva{" "}
+              </h2>
+              <span
+                className={`text-4xl sm:text-5xl max-w-4xl font-bold md:text-6xl lg:text-7xl ${textTitle()}`}
+              >
+                para o Seu Controle Financeiro.
+              </span>
+              <p className="mt-4 text-lg">
+                Explore um painel de controle abrangente com opções de filtragem
+                e ordenação de dados que tornam o acompanhamento financeiro uma
+                experiência intuitiva.
+              </p>
+            </div>
+            <div>
+              <div className="relative isolate">
+                <div>
+                  <div className="mx-auto max-w-6xl px-6 lg:px-8">
+                    <div className="mt-16 flow-root sm:mt-24">
+                      <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
+                        <Image
+                          src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/dashboard.png?raw=true"
+                          alt="bloon preview"
+                          width={1364}
+                          height={866}
+                          quality={100}
+                          className="rounded-md bg-white p-2 sm:p-8 md:p-[0.7px] shadow-2xl ring-1 ring-gray-900/10"
+                        />
                       </div>
                     </div>
                   </div>
@@ -145,26 +144,26 @@ const page = async () => {
             </div>
           </div>
           {/* Seção das metas */}
-          <div className="mx-auto mt--10 max-w-5xl sm:mt-56">
+          <div className="mx-auto mt--10 max-w-5xl mt-40">
             <div className="mb-12 px-6 lg:px-8">
               <div className="mx-auto max-w-2xl sm:text-center">
                 <h2
                   className={`text-4xl sm:text-5xl max-w-4xl font-bold md:text-6xl lg:text-7xl ${textTitle()}`}
                 >
-                  Tudo no{" "}
+                  Tenha{" "}
                   <span
                     className={`text-4xl sm:text-5xl max-w-4xl font-bold md:text-6xl lg:text-7xl ${textTitle(
                       { color: "green" }
                     )}`}
                   >
-                    seu controle!
+                    Controle Total das Suas Finanças!
                   </span>
                 </h2>
                 <p className="mt-4 text-lg">
-                  Para te ajudar no acompanhamento dos gastos mensais, você tem
-                  a possibilidade de{" "}
-                  <span className="font-bold">limitar os gastos</span> por
-                  categoria.
+                  Simplificamos o gerenciamento de suas despesas mensais,
+                  permitindo que você defina limites de gastos por categoria
+                  para manter tudo sob controle e <span className="font-bold">alcançar seus objetivos
+                  financeiros.</span>
                 </p>
               </div>
             </div>
@@ -216,7 +215,7 @@ const page = async () => {
             </div>
           </div>
           {/* Seção de passo a passo */}
-          <div className="mx-auto mb-5 max-w-5xl sm:mt-56">
+          <div className="mx-auto mb-5 max-w-5xl mt-40 sm:mt-56">
             <div className="mb-12 px-6 lg:px-8">
               <div className="mx-auto max-w-2xl sm:text-center">
                 <h2

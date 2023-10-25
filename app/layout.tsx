@@ -10,6 +10,7 @@ import BottomBar from "@/components/shared/BottomBar";
 import { auth } from "@/lib/auth";
 import { QueryProvider } from "@/components/providers/query.provider";
 import { Toaster } from "sonner";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -56,7 +57,7 @@ export default async function RootLayout({
                 <main className="container mx-auto max-w-7xl px-6 flex-grow">
                   {children}
                 </main>
-                {session?.user.id ? <BottomBar /> : ""}
+                {session?.user.id ? <BottomBar /> : <Footer />}
               </div>
             </ThemeProvider>
           </body>
